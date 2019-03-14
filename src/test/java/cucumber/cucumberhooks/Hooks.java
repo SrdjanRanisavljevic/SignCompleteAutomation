@@ -1,6 +1,8 @@
 package cucumber.cucumberhooks;
 
 import api.drivers.Drivers;
+import core.helpers.ADB;
+import core.helpers.MacTerminalCmd;
 import core.helpers.WebHelpers;
 import core.managers.DriverManagerAndroid;
 import core.managers.DriverManagerIOS;
@@ -12,16 +14,36 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static core.helpers.NetworkHelpers.getConnectionStatus;
-import static core.jsonParsers.ConfigJasonFileReading.getPlatformUnderTest;
-import static core.jsonParsers.ConfigJasonFileReading.runningSetup;
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
+import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 import static core.watchers.MobileTestWatcher.*;
 import static core.watchers.ScreenshotFailedTests.screenshotFailedTestCucumber;
 
 public class Hooks {
 
     @Before(order = 1)
+    public void uninstallTheApp(Scenario scenario) throws IOException, InterruptedException {
+        if (scenario.getName().contains("first uninstall") && runningSetup().getPlatformName().equals("ios")) {
+            MyLogger.log.info("+++++++++++++ Uninstalling the app since it is required +++++++++++++");
+            MacTerminalCmd.runCommand("ios-deploy --id " + runningSetup().getDeviceID() + " --uninstall_only --bundle_id " + runningSetup().getBundleId());
+            MyLogger.log.info("+++++++++++++ Installing the app tto be fresh installed +++++++++++++");
+            MacTerminalCmd.runCommand("ios-deploy --id " + runningSetup().getDeviceID() + " --bundle " + runningSetup().getAppLocation());
+        } else if (scenario.getName().contains("first uninstall") && runningSetup().getPlatformName().equals("android")) {
+            MyLogger.log.info("+++++++++++++ Uninstalling the app since it is required +++++++++++++");
+            MyLogger.log.info("adb -s " + runningSetup().getDeviceID() + " uninstall " + runningSetup().getAppPackage());
+            ADB.command("adb -s " + runningSetup().getDeviceID() + " uninstall " + runningSetup().getAppPackage());
+
+
+            MyLogger.log.info("+++++++++++++ Installing the app tto be fresh installed +++++++++++++");
+            ADB.command("adb -s " + runningSetup().getDeviceID() + " install " + runningSetup().getAppLocation());
+        }
+    }
+
+
+    @Before(order = 2)
     public void starting(Scenario scenario) {
         synchronized (this) {
             startedTests++;
@@ -46,7 +68,7 @@ public class Hooks {
         }
     }
 
-    @Before(order = 2)
+    @Before(order = 3)
     public void seeIfWifiIsEnabled() throws FileNotFoundException {
         MyLogger.log.info("+++++++++++++ VERIFY IF WI-FI IS ENABLED BEFORE STARTING THE TEST +++++++++++++");
         if (runningSetup().getPlatformName().equals("android")) {
@@ -61,7 +83,7 @@ public class Hooks {
         }
     }
 
-    @Before(order = 3)
+    @Before(order = 4)
     public void startIowWebKit(Scenario scenario) throws Exception {
         if (scenario.getName().contains("[Payment]") && runningSetup().getPlatformName().equals("ios")) {
             WebHelpers.startIosWebKit();
@@ -118,5 +140,6 @@ public class Hooks {
             WebHelpers.stopIosWebKit();
         }
     }
+
 
 }

@@ -7,7 +7,7 @@ import org.junit.runner.Description;
 
 import java.io.IOException;
 
-import static core.jsonParsers.ConfigJasonFileReading.getPlatformUnderTest;
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.watchers.ScreenshotFailedTests.screenshotFailedTest;
 
 public class MobileTestWatcher extends TestWatcher {

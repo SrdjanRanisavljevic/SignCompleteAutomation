@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static core.helpers.MacTerminalCmd.runCommand;
-import static core.jsonParsers.ConfigJasonFileReading.getIOSJasonResults;
+import static core.json.parsers.ConfigJasonFileReading.getIOSJasonResults;
 
 public class WebHelpers {
 

@@ -10,8 +10,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 
-import static core.jsonParsers.ConfigJasonFileReading.getPlatformUnderTest;
-import static core.jsonParsers.ConfigJasonFileReading.runningSetup;
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
+import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class Drivers {
 

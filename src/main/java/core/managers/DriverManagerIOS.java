@@ -3,7 +3,7 @@ package core.managers;
 import api.drivers.Drivers;
 import core.constants.Arg;
 import core.constants.Resources;
-import core.jsonParsers.ConfigJasonFileReading;
+import core.json.parsers.ConfigJasonFileReading;
 import core.watchers.MyLogger;
 import core.watchers.Timer;
 import cucumber.api.Scenario;
