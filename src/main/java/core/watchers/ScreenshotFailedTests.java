@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static core.jsonParsers.ConfigJasonFileReading.getPlatformUnderTest;
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.watchers.TestInfo.name;
 
 public class ScreenshotFailedTests {

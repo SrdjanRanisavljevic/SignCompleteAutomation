@@ -1,7 +1,7 @@
 package core.helpers;
 
 import api.drivers.Drivers;
-import core.classicmethods.Swipe;
+import core.classic.methods.Swipe;
 import core.watchers.MyLogger;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -16,10 +16,11 @@ import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.Properties;
 
-import static core.classicmethods.Swipe.refreshEmailListUntilEmailIsDisplayed;
+import static core.classic.methods.Swipe.refreshEmailListUntilEmailIsDisplayed;
 import static org.junit.Assert.fail;
 
 public class EmailHelpers {
@@ -43,7 +44,7 @@ public class EmailHelpers {
      * @param myEmailAddress - the email address to send the email to
      * @return Subject of email
      */
-    public static String testMailSubject(String myEmailAddress) {
+    public static String testMailSubject(String myEmailAddress) throws FileNotFoundException {
 
         String subject = String.format("Subject %f", Math.random());
         return testMailSubject(myEmailAddress, subject, getCurrentTestMethod());
@@ -60,7 +61,7 @@ public class EmailHelpers {
      * @param myEmailAddress - the email address to send the email to
      * @return Subjects of emails sent
      */
-    public static String[] testMailSubject(String myEmailAddress, int numberOfEmails) {
+    public static String[] testMailSubject(String myEmailAddress, int numberOfEmails) throws FileNotFoundException {
 
         String[] subjects = new String[numberOfEmails];
         for (int i = 0; i < numberOfEmails; i++) {
@@ -89,7 +90,7 @@ public class EmailHelpers {
      * @param body
      * @return Subjects of email
      */
-    private static String[] testMailSubject(String myEmailAddress, String[] subjects, String body) {
+    private static String[] testMailSubject(String myEmailAddress, String[] subjects, String body) throws FileNotFoundException {
         return testMailSubject(myEmailAddress, "paket_qs_05@ver.sul.t-online.de", "1234test", subjects, body);
     }
 
@@ -103,7 +104,7 @@ public class EmailHelpers {
      * @return Subjects of email
      */
     public static String[] testMailSubject(String myEmailAddress, String fromEmailAddress, String[] subjects,
-                                           String body) {
+                                           String body) throws FileNotFoundException {
         return testMailSubject(myEmailAddress, fromEmailAddress, "1234test", subjects, body);
     }
 
@@ -117,7 +118,7 @@ public class EmailHelpers {
      * @return
      */
     private static String testMailSubject(String myEmailAddress,
-                                          String subject, String body) {
+                                          String subject, String body) throws FileNotFoundException {
         String[] subjects = new String[1];
         subjects[0] = subject;
         String[] returnSubject = testMailSubject(myEmailAddress, "paket_qs_05@ver.sul.t-online.de", "1234test", subjects, body);
@@ -136,7 +137,7 @@ public class EmailHelpers {
      * @return
      */
     private static String[] testMailSubject(String myEmailAddress, String fromEmailAddress, String fromEmailPassword,
-                                            String[] subjects, String body) {
+                                            String[] subjects, String body) throws FileNotFoundException {
         try {
             for (String subject : subjects) {
                 SmtpEmail.putMailInInbox(fromEmailAddress, fromEmailPassword, myEmailAddress, subject, body);
@@ -162,7 +163,7 @@ public class EmailHelpers {
      * @param myEmailAddress
      * @return Subject of email
      */
-    public static String testMailSubjectWithAttachment(String myEmailAddress) {
+    public static String testMailSubjectWithAttachment(String myEmailAddress) throws FileNotFoundException {
 
         String subject = String.format("Subject %f", Math.random());
         try {
@@ -187,7 +188,7 @@ public class EmailHelpers {
      * @param pathToAttachment
      * @return Subject of email
      */
-    public static String testMailSubjectWithAttachment(String myEmailAddress, String pathToAttachment) {
+    public static String testMailSubjectWithAttachment(String myEmailAddress, String pathToAttachment) throws FileNotFoundException {
 
         String subject = String.format("Subject %f", Math.random());
         try {
@@ -210,7 +211,7 @@ public class EmailHelpers {
      *
      * @param subject
      */
-    public static void openEmail(String subject) {
+    public static void openEmail(String subject) throws FileNotFoundException {
         // 99.9% of the time the email is visible.
         try {
             log.info("Clicking email with subject: " + subject);
@@ -242,7 +243,7 @@ public class EmailHelpers {
      *
      * @param subjects
      */
-    private static void waitForEmail(String... subjects) {
+    private static void waitForEmail(String... subjects) throws FileNotFoundException {
         // Funtion has to be in folder to work ! ! !
 
         String folderName = "";

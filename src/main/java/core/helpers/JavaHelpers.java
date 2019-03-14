@@ -49,6 +49,19 @@ public class JavaHelpers {
         return sb.toString();
     }
 
+
+    public static String typeRandomNumbers(int size) {
+        char[] chars = {1,2,3,4,5,6,7,8,9,0};
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            int c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+
     /**
      * CONVERT A STRING OF TYPE "123" TO AN INT
      *

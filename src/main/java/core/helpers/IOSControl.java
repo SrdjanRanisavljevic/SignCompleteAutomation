@@ -1,8 +1,8 @@
 package core.helpers;
 
 import api.drivers.Drivers;
-import core.classicmethods.Gestures;
-import core.classicmethods.Waiters;
+import core.classic.methods.Gestures;
+import core.classic.methods.Waiters;
 import core.watchers.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -168,11 +168,11 @@ public class IOSControl {
                 if (mobileDataSwitchOFF.isDisplayed())
                     MyLogger.log.info("Mobile Data is DISABLED, so we can enable it");
                 gestures.clickOnMobileElement(mobileDataSwitchOFF);
-                waiters.waitForElementVIsibility(mobileDataSwitchON);
+                waiters.waitForElementVisibility(mobileDataSwitchON);
             } catch (Exception e) {
                 MyLogger.log.info("Mobile Data is already ENABLED, so we can DISABLE it");
                 gestures.clickOnMobileElement(mobileDataSwitchON);
-                waiters.waitForElementVIsibility(mobileDataSwitchOFF);
+                waiters.waitForElementVisibility(mobileDataSwitchOFF);
             }
         } catch (Exception e) {
             throw new AssertionError("Could not enable Mobile Data");

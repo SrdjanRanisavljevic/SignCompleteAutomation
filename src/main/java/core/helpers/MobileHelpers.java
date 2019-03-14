@@ -1,7 +1,7 @@
 package core.helpers;
 
 import api.drivers.Drivers;
-import core.classicmethods.AssertsUtils;
+import core.classic.methods.AssertsUtils;
 import core.watchers.MyLogger;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.TouchAction;
