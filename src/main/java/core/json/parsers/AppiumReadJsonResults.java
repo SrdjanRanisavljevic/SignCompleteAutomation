@@ -18,6 +18,7 @@ public class AppiumReadJsonResults {
     private String deviceOrientation;
     private String OSversion;
     private String name;
+    private String prefixEmail;
 
     /**
      * Server/App Capabilities - Android
@@ -400,5 +401,13 @@ public class AppiumReadJsonResults {
 
     public String getName() {
         return name;
+    }
+
+    public void setPrefixEmail(String prefixEmail) {
+        this.prefixEmail = prefixEmail;
+    }
+
+    public String getPrefixEmail() {
+        return prefixEmail;
     }
 }
