@@ -29,7 +29,7 @@ public class Hooks {
         if (scenario.getName().contains("first uninstall") && runningSetup().getPlatformName().equals("ios")) {
             MyLogger.log.info("+++++++++++++ Uninstalling the app since it is required +++++++++++++");
             MacTerminalCmd.runCommand("ios-deploy --id " + runningSetup().getDeviceID() + " --uninstall_only --bundle_id " + runningSetup().getBundleId());
-            MyLogger.log.info("+++++++++++++ Installing the app tto be fresh installed +++++++++++++");
+            MyLogger.log.info("+++++++++++++ Installing the app to be fresh installed +++++++++++++");
             MacTerminalCmd.runCommand("ios-deploy --id " + runningSetup().getDeviceID() + " --bundle " + runningSetup().getAppLocation());
         } else if (scenario.getName().contains("first uninstall") && runningSetup().getPlatformName().equals("android")) {
             MyLogger.log.info("+++++++++++++ Uninstalling the app since it is required +++++++++++++");
@@ -37,7 +37,7 @@ public class Hooks {
             ADB.command("adb -s " + runningSetup().getDeviceID() + " uninstall " + runningSetup().getAppPackage());
 
 
-            MyLogger.log.info("+++++++++++++ Installing the app tto be fresh installed +++++++++++++");
+            MyLogger.log.info("+++++++++++++ Installing the app to be fresh installed +++++++++++++");
             ADB.command("adb -s " + runningSetup().getDeviceID() + " install " + runningSetup().getAppLocation());
         }
     }

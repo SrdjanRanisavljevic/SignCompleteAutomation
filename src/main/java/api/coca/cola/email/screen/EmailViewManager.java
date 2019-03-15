@@ -13,9 +13,11 @@ public class EmailViewManager {
 
         EmailView emailView = null;
 
-        if (runningSetup().getPlatformName().equalsIgnoreCase("android") && (runningSetup().getDeviceID().equalsIgnoreCase("HT8281A03687//"))) {
-            emailView = new EmailViewPixel();
-        } else if ((runningSetup().getPlatformName().equalsIgnoreCase("android"))) {
+//        if (runningSetup().getPlatformName().equalsIgnoreCase("android") && (runningSetup().getDeviceID().equalsIgnoreCase("HT8281A03687//"))) {
+//            emailView = new EmailViewPixel();
+//        } else
+
+        if ((runningSetup().getPlatformName().equalsIgnoreCase("android"))) {
             emailView = new PrivateEmailViewAos();
         } else if (runningSetup().getPlatformName().equalsIgnoreCase("ios")) {
             emailView = new PrivateEmailViewIos();

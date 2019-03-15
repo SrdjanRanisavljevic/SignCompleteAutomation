@@ -97,4 +97,17 @@ public class EmailAddressView extends ScreenView {
         ScreenView screenView = utilView.clickOnProceedButton(new CountrySelectionView(), gestures, proceedBtn);
         return (CountrySelectionView) screenView;
     }
+
+
+    public EmailAddressView sendTextAlreadyRegisteredEmail(String email) {
+        try {
+            MyLogger.log.info("Trying to send text: " + email + " to e-mail address input");
+            gestures.sendText(emailInput, email);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot send text: " + email + " to e-mail address input");
+        }
+    }
+
+
 }

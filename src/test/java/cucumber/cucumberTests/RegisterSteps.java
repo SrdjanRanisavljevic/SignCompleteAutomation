@@ -22,6 +22,8 @@ public class RegisterSteps {
     private int desiredYearForNormalUser = 2001;
     private int currentYear = 2000;
     private int desiredYearForTooYoungUser = 2010;
+    private String usermail = runningSetup().getUsermail();
+
 
     public RegisterSteps() throws FileNotFoundException {
 
@@ -133,4 +135,30 @@ public class RegisterSteps {
         TooYoungToJoinView tooYoungToJoinView = new TooYoungToJoinView();
         tooYoungToJoinView.validateElementsFromTooYoungToJoinScreen();
     }
+
+    @Given("^User enters an already registered e-mail address$")
+    public void userEntersAnAlreadyRegisteredEMailAddress() {
+        EmailAddressView emailAddressView = new EmailAddressView();
+        emailAddressView.sendTextAlreadyRegisteredEmail(usermail).clickOnProceedButton();
+
+    }
+
+
+    @Then("^User is in Check E-mail Screen$")
+    public void userIsInCheckEMailScreen() {
+        CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
+        checkMagicLinkView.validateElementsAlreadyRegisteredUser();
+    }
+
+
+    @And("^User is recognized as to be already registered$")
+    public void userIsRecognizedAsToBeAlreadyRegistered() throws FileNotFoundException {
+        CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
+        checkMagicLinkView.validateMessageForAlreadyRegisteredUser();
+    }
+
+
+
+
+
 }

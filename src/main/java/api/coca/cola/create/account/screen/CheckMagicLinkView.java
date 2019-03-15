@@ -11,6 +11,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
@@ -58,6 +59,20 @@ public class CheckMagicLinkView extends ScreenView {
     private MobileElement gMail;
 
 
+    /**
+     * Elements for an already registered user
+     */
+
+    @iOSXCUITFindBy(accessibility = "Oh, we already know you!")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Oh, we already know you!\")")
+    private MobileElement alreadyknowYouLabel;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] 'Looks like you already have a Coca-Cola account!'")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/magic_link_subtitle\")")
+    private MobileElement alreadyknowYouText;
+
+
+
     public CheckMagicLinkView validateElementsCheckMagicLinkView() {
         try {
             MyLogger.log.info("Validating elements from Check Magic Link View");
@@ -92,6 +107,35 @@ public class CheckMagicLinkView extends ScreenView {
             throw new AssertionError("Cannot click on Check Email button");
         }
     }
+
+
+    public CheckMagicLinkView validateElementsAlreadyRegisteredUser() {
+        try {
+            MyLogger.log.info("Try to validate elements from Check Magic Link View for a registered user");
+            waiters.waitForElementVisibility(alreadyknowYouLabel);
+            assertsUtils.isElementEnabled(logo);
+            assertsUtils.isElementDisplayed(checkEmailBtn);
+            assertsUtils.isElementDisplayed(enterCodeBtn);
+            assertsUtils.isElementDisplayed(sendLinkAgainBtn);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate elements from Check Magic Link View for a registered user");
+        }
+    }
+
+
+    public CheckMagicLinkView validateMessageForAlreadyRegisteredUser() {
+        try {
+            MyLogger.log.info("Try to validate the message displayed for an already registered user");
+            waiters.waitForElementVisibility(alreadyknowYouText);
+            Assert.assertTrue("The user is not registered yet", alreadyknowYouText.getAttribute("name").contains("Looks like you already have a Coca-Cola account!"));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate the message displayed for an already registered user");
+        }
+    }
+
+
 
 
 }
