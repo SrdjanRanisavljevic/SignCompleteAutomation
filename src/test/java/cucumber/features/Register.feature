@@ -4,7 +4,7 @@ Feature: Register features
     Given User is in Launcher Screen
     And User selects Create Account
 
-  Scenario: [first uninstall] Register a new user
+  Scenario: [first uninstall] Register a new user using magic link
     Given User enters a valid e-mail address
     And User selects a country from the list
     And User enters birth date
@@ -40,3 +40,15 @@ Feature: Register features
     And User selects a country from the list
     And User enters a birth date from a recent date
     Then User is notified that he is too young to register
+
+
+  Scenario: [first uninstall] Trying to register an already registered user and continue with Login flow
+    Given User enters an already registered e-mail address
+    Then User is in Check E-mail Screen
+    And User is recognized as to be already registered
+    When User clicks Check E-mail from Magic Link
+    And User unlocks the app from received e-mail
+    And User skips tutorial
+    Then User is in Home View
+
+
