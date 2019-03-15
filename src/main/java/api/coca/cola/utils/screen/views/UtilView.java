@@ -1,5 +1,6 @@
 package api.coca.cola.utils.screen.views;
 
+import api.coca.cola.utils.screen.views.ScreenView;
 import core.classic.methods.Gestures;
 import core.watchers.MyLogger;
 import io.appium.java_client.MobileElement;

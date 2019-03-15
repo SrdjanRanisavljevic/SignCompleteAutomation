@@ -1,10 +1,13 @@
 package cucumber.cucumberTests;
 
 import api.coca.cola.create.account.screen.*;
+import api.coca.cola.home.screen.HomeView;
 import api.coca.cola.launcher.screen.LauncherView;
 import api.coca.cola.tutorial.screen.TutorialScanView;
+import api.coca.cola.utils.workarounds.WorkaroundsPhone;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import java.io.FileNotFoundException;
@@ -15,9 +18,10 @@ import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 public class RegisterSteps {
 
     private String name = runningSetup().getName();
-    private String prefixEmail = "tccc.johndoe+";
-    private int desiredYearForNormalUser = 1999;
+    private String prefixEmail = runningSetup().getPrefixEmail();
+    private int desiredYearForNormalUser = 2001;
     private int currentYear = 2000;
+    private int desiredYearForTooYoungUser = 2010;
 
     public RegisterSteps() throws FileNotFoundException {
 
@@ -58,7 +62,7 @@ public class RegisterSteps {
                 .clickOnProceedBtn();
     }
 
-        @And("^User proceeds with Consents$")
+    @And("^User proceeds with Consents$")
     public void userProceedsWithConsents() throws IOException, org.json.simple.parser.ParseException {
         ConsentsView consentsView = new ConsentsView();
         consentsView.tickThePromotionsToggle()
@@ -90,4 +94,43 @@ public class RegisterSteps {
         tutorialScanView.clickOnSkipTutorialButton();
     }
 
+    @And("^User \"([^\"]*)\"$")
+    public void user(String arg1) throws Throwable {
+        WorkaroundsPhone workaroundsPhone = new WorkaroundsPhone();
+        if (arg1.equals("puts the app in the background")) {
+            workaroundsPhone.putAppInBackground(5);
+        } else {
+            workaroundsPhone.closeApp();
+        }
+
+    }
+
+
+    @And("^User open the app$")
+    public void userOpenTheApp() throws FileNotFoundException {
+        WorkaroundsPhone workaroundsPhone = new WorkaroundsPhone();
+        workaroundsPhone.reviveApp();
+    }
+
+    @Then("^User is in \"([^\"]*)\"$")
+    public void userIsIn(String arg0) {
+        HomeView homeScreenView = new HomeView();
+        if (arg0.equalsIgnoreCase("Home Screen")) {
+            homeScreenView.validateElementsFromHomeView();
+        }
+    }
+
+    @And("^User enters a birth date from a recent date$")
+    public void userEntersABirthDateFromARecentDate() {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView
+                .selectYear(currentYear, desiredYearForTooYoungUser)
+                .clickOnProceedBtn();
+    }
+
+    @Then("^User is notified that he is too young to register$")
+    public void userIsNotifiedThatHeIsTooYoungToRegister() throws FileNotFoundException {
+        TooYoungToJoinView tooYoungToJoinView = new TooYoungToJoinView();
+        tooYoungToJoinView.validateElementsFromTooYoungToJoinScreen();
+    }
 }

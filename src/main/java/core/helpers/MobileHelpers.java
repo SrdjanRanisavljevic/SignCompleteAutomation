@@ -128,6 +128,7 @@ public class MobileHelpers {
      * @param appBundleId Bundle id of your app
      */
     public static void closeApp(String appBundleId) {
+        MyLogger.log.info("Trying to close the app");
         JavascriptExecutor js = Drivers.getMobileDriver();
         MyLogger.log.info("Closing the app: " + appBundleId);
         Map<String, Object> params = new HashMap<>();
