@@ -11,11 +11,13 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
@@ -37,7 +39,7 @@ public class PrivateEmailViewAos implements EmailView {
     @AndroidFindBy(uiAutomator = "new UiSelector().descriptionContains(\"Open navigation drawer\")")
     private MobileElement navigationDrawer;
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[5]/android.widget.LinearLayout/android.widget.TextView[1]")
+    @AndroidFindBy(xpath = "//android.widget.ListView/android.widget.LinearLayout[4]")
     private MobileElement promotionsLabel;
 
 
@@ -139,22 +141,30 @@ public class PrivateEmailViewAos implements EmailView {
         }
     }
 
+public void clickOnPromotions(){
+    MyLogger.log.info("Trying to click on promotions label");
+    try {
+        List<MobileElement> columns = emailList.findElements(By.className("android.widget.LinearLayout"));
+        MobileElement promotions = columns.get(5);
+        promotions.click();
 
+    }catch (WebDriverException i) {
+        MyLogger.log.info("Trying to click on promotions label");
+    }
+}
     public void navigationDrawer() throws FileNotFoundException {
 
         MyLogger.log.info("Trying to click on navigation drawer");
         try {
             if (emailList.isDisplayed()) {
                 MobileGestures.tapOutsideTheEmailListBox(emailList);
-                gestures.clickOnMobileElement(navigationDrawer);
-                gestures.clickOnMobileElement(promotionsLabel);
+                clickOnPromotions();
                 waiters.waitForElementVisibility(promotionsText);
                 Swipe.swipeDown();
                 Swipe.swipeDown();
                 gestures.clickOnMobileElement(receivedEmail);
             } else {
-                gestures.clickOnMobileElement(navigationDrawer);
-                gestures.clickOnMobileElement(promotionsLabel);
+               clickOnPromotions();
                 waiters.waitForElementVisibility(promotionsText);
                 Swipe.swipeDown();
                 Swipe.swipeDown();
@@ -163,7 +173,7 @@ public class PrivateEmailViewAos implements EmailView {
             }
         } catch (WebDriverException i) {
             gestures.clickOnMobileElement(navigationDrawer);
-            gestures.clickOnMobileElement(promotionsLabel);
+            clickOnPromotions();
             waiters.waitForElementVisibility(promotionsText);
             Swipe.swipeDown();
             Swipe.swipeDown();

@@ -1,6 +1,5 @@
 /out
 /.idea
-/target
 /build
 /.gradle
 /src/main/resources/queue.json
