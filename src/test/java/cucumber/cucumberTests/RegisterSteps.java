@@ -79,13 +79,13 @@ public class RegisterSteps {
     }
 
     @When("^User clicks on E-mail Me Magic Link$")
-    public void userClicksOnEMailMeMagicLink() {
+    public void userClicksOnEMailMeMagicLink() throws FileNotFoundException {
         GetMagicLinkView getMagicLinkView = new GetMagicLinkView();
         getMagicLinkView.clickOnEmailMeMagicLink();
     }
 
     @And("^User clicks Check E-mail from Magic Link$")
-    public void userClicksCheckEMailFromMagicLink() {
+    public void userClicksCheckEMailFromMagicLink() throws FileNotFoundException {
         CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
         checkMagicLinkView.clickOnCheckEmailBtn();
     }
@@ -143,13 +143,11 @@ public class RegisterSteps {
 
     }
 
-
     @Then("^User is in Check E-mail Screen$")
-    public void userIsInCheckEMailScreen() {
+    public void userIsInCheckEMailScreen() throws FileNotFoundException {
         CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
         checkMagicLinkView.validateElementsAlreadyRegisteredUser();
     }
-
 
     @And("^User is recognized as to be already registered$")
     public void userIsRecognizedAsToBeAlreadyRegistered() throws FileNotFoundException {
@@ -157,7 +155,79 @@ public class RegisterSteps {
         checkMagicLinkView.validateMessageForAlreadyRegisteredUser();
     }
 
+    @When("^User clicks back from E-mail Me Magic Link$")
+    public void userClicksBackFromEMailMeMagicLink() {
+        GetMagicLinkView getMagicLinkView = new GetMagicLinkView();
+        getMagicLinkView.clickOnNavigateBackBtn();
+    }
 
+        @And("^Validates the name displayed in SetUpProfile screen$")
+    public void validatesTheNameDisplayedInSetUpProfileScreen() throws FileNotFoundException {
+        SetUpProfileView setUpProfileView = new SetUpProfileView();
+        setUpProfileView.getDisplayedName(name);
+    }
+
+    @And("^User goes back from display name$")
+    public void userGoesBackFromDisplayName() {
+        SetUpProfileView setUpProfileView = new SetUpProfileView();
+        setUpProfileView.clickOnNavigateBackBtn();
+    }
+
+    @And("^Validates the selected special offers from Consents screen$")
+    public void validatesTheSelectedSpecialOffersFromConsentsScreen() throws FileNotFoundException {
+        ConsentsView consentsView = new ConsentsView();
+        consentsView.isPromotionsToggleTicked();
+    }
+
+    @And("^User goes back from Consents$")
+    public void userGoesBackFromConsents() {
+        ConsentsView consentsView = new ConsentsView();
+        consentsView.clickOnNavigateBackBtn();
+    }
+
+    @And("^User validates the displayed date of birth$")
+    public void userValidatesTheDisplayedDateOfBirth() {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView.validateDisplayedBirthday(desiredYearForNormalUser);
+    }
+
+    @And("^User goes back from birth day screen$")
+    public void userGoesBackFromBirthDayScreen() {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView.clickOnNavigateBackBtn();
+    }
+
+    @And("^Validates that a country is still selected$")
+    public void validatesThatACountryIsStillSelected() {
+        CountrySelectionView countrySelectionView = new CountrySelectionView();
+        BirthdaySelectionView birthdaySelectionView = countrySelectionView.clickOnProceedButton();
+        birthdaySelectionView.validateElementsfromBirthdayScreen();
+        birthdaySelectionView.clickOnNavigateBackBtn();
+    }
+
+    @When("^User goes back from Country Selection screen$")
+    public void userGoesBackFromCountrySelectionScreen() {
+        CountrySelectionView countrySelectionView = new CountrySelectionView();
+        countrySelectionView.clickNavigateBackBtn();
+    }
+
+    @Then("^User validates the email displayed in Email Address screen$")
+    public void userValidatesTheEmailDisplayedInEmailAddressScreen() throws FileNotFoundException {
+        EmailAddressView emailAddressView = new EmailAddressView();
+        emailAddressView.getDisplayedEmail(prefixEmail);
+    }
+
+    @When("^User clicks on Enter Code$")
+    public void userClicksOnEnterCode() throws FileNotFoundException {
+        CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
+        checkMagicLinkView.clickOnEnterCodeBtn();
+    }
+
+    @And("^User enters the verification code$")
+    public void userEntersTheVerificationCode() throws Exception {
+        CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
+        checkMagicLinkView.sendTextVerificationCode();
+    }
 
 
 

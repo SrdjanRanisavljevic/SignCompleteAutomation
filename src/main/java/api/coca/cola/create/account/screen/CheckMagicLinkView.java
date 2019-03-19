@@ -1,5 +1,6 @@
 package api.coca.cola.create.account.screen;
 
+import api.coca.cola.email.screen.CheckingMails;
 import api.coca.cola.utils.screen.views.ScreenView;
 import api.drivers.Drivers;
 import core.classic.methods.AssertsUtils;
@@ -15,9 +16,13 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileNotFoundException;
+
+import static core.json.parsers.ConfigJasonFileReading.runningSetup;
+
 public class CheckMagicLinkView extends ScreenView {
 
-    public CheckMagicLinkView() {
+    public CheckMagicLinkView() throws FileNotFoundException {
         AppiumDriver driver = Drivers.getMobileDriver();
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -25,6 +30,18 @@ public class CheckMagicLinkView extends ScreenView {
     private final Waiters waiters = new Waiters();
     private final AssertsUtils assertsUtils = new AssertsUtils();
     private final Gestures gestures = new Gestures();
+
+
+    /**
+     * Enter code - variables
+     */
+
+    private String host = "pop.gmail.com";// change accordingly
+    private String mailStoreType = "pop3";
+    private String usermail = runningSetup().getUsermail();
+    private String password = runningSetup().getUserpassword();
+    private String code = "";
+    CheckingMails cm = new CheckingMails();
 
 
     /**
@@ -71,6 +88,25 @@ public class CheckMagicLinkView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/magic_link_subtitle\")")
     private MobileElement alreadyknowYouText;
 
+
+    /**
+     * Enter Code Pop-up Elements
+     */
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] 'Magic Link'")
+    private MobileElement verificationCodeLabel;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] 'Enter your code '")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/enter_text_message\")")
+    private MobileElement verificationCodeDescription;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTextField")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/text_value\")")
+    private MobileElement verificationCodeInput;
+
+    @iOSXCUITFindBy(accessibility = "Login")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/text_confirm\")")
+    private MobileElement proceedBtn;
 
 
     public CheckMagicLinkView validateElementsCheckMagicLinkView() {
@@ -135,6 +171,29 @@ public class CheckMagicLinkView extends ScreenView {
         }
     }
 
+
+    public CheckMagicLinkView clickOnEnterCodeBtn() {
+        try {
+            MyLogger.log.info("Trying to click on Enter Code button");
+            gestures.clickOnMobileElement(enterCodeBtn);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Enter Code button");
+        }
+    }
+
+
+    public CheckMagicLinkView sendTextVerificationCode() throws Exception {
+        try {
+            MyLogger.log.info("Trying to get the verification code");
+            code = cm.writePart(cm.fetch(host, mailStoreType, usermail, password));
+            gestures.sendText(verificationCodeInput, code);
+            gestures.clickOnMobileElement(proceedBtn);
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot get the verification code");
+        }
+        return this;
+    }
 
 
 

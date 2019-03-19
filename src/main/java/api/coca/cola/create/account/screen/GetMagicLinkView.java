@@ -1,6 +1,7 @@
 package api.coca.cola.create.account.screen;
 
 import api.coca.cola.utils.screen.views.ScreenView;
+import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
 import core.classic.methods.AssertsUtils;
 import core.classic.methods.Gestures;
@@ -14,6 +15,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileNotFoundException;
+
 public class GetMagicLinkView extends ScreenView {
 
     public GetMagicLinkView() {
@@ -24,6 +27,7 @@ public class GetMagicLinkView extends ScreenView {
     private final Waiters waiters = new Waiters();
     private final AssertsUtils assertsUtils = new AssertsUtils();
     private final Gestures gestures = new Gestures();
+    UtilView utilView = new UtilView();
 
 
     /**
@@ -97,7 +101,7 @@ public class GetMagicLinkView extends ScreenView {
     }
 
 
-    public CheckMagicLinkView clickOnEmailMeMagicLink() {
+    public CheckMagicLinkView clickOnEmailMeMagicLink() throws FileNotFoundException {
         try {
             MyLogger.log.info("Trying to click on Email Me Magic Link button");
             gestures.clickOnMobileElement(magicLinkBtn);
@@ -106,5 +110,14 @@ public class GetMagicLinkView extends ScreenView {
         }
         return new CheckMagicLinkView();
     }
+
+
+    public SetUpProfileView clickOnNavigateBackBtn() {
+        MyLogger.log.info("Trying to click on navigate back button to move to Set Up Profile View");
+        ScreenView screenView = utilView.clickOnNavigateBackBtn(new SetUpProfileView(), gestures, backBtn);
+        return (SetUpProfileView) screenView;
+    }
+
+
 
 }

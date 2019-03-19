@@ -13,8 +13,13 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.FileNotFoundException;
+
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 
 public class EmailAddressView extends ScreenView {
 
@@ -108,6 +113,24 @@ public class EmailAddressView extends ScreenView {
             throw new AssertionError("Cannot send text: " + email + " to e-mail address input");
         }
     }
+
+
+    public EmailAddressView getDisplayedEmail(String prefixEmail) throws FileNotFoundException {
+        try {
+            MyLogger.log.info("Trying to get the displayed E-mail");
+            waiters.waitForElementVisibility(backBtn);
+            if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+                Assert.assertTrue("The displayed e-mail does not correspond to the expected e-mail", emailInput.getAttribute("value").contains(prefixEmail));
+            } else {
+                Assert.assertTrue("The displayed e-mail does not correspond to the expected e-mail", emailInput.getAttribute("name").contains(prefixEmail));
+            }
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on navigate back button to move to Launcher Screen");
+        }
+
+    }
+
 
 
 }
