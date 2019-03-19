@@ -39,7 +39,7 @@ public class PrivateEmailViewAos implements EmailView {
     @AndroidFindBy(uiAutomator = "new UiSelector().descriptionContains(\"Open navigation drawer\")")
     private MobileElement navigationDrawer;
 
-    @AndroidFindBy(xpath = "//android.widget.ListView/android.widget.LinearLayout[4]")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/list\").childSelector(new UiSelector().text(\"Promotions\"))")
     private MobileElement promotionsLabel;
 
 
@@ -141,30 +141,22 @@ public class PrivateEmailViewAos implements EmailView {
         }
     }
 
-public void clickOnPromotions(){
-    MyLogger.log.info("Trying to click on promotions label");
-    try {
-        List<MobileElement> columns = emailList.findElements(By.className("android.widget.LinearLayout"));
-        MobileElement promotions = columns.get(5);
-        promotions.click();
 
-    }catch (WebDriverException i) {
-        MyLogger.log.info("Trying to click on promotions label");
-    }
-}
     public void navigationDrawer() throws FileNotFoundException {
 
         MyLogger.log.info("Trying to click on navigation drawer");
         try {
             if (emailList.isDisplayed()) {
                 MobileGestures.tapOutsideTheEmailListBox(emailList);
-                clickOnPromotions();
+                gestures.clickOnMobileElement(navigationDrawer);
+                gestures.clickOnMobileElement(promotionsLabel);
                 waiters.waitForElementVisibility(promotionsText);
                 Swipe.swipeDown();
                 Swipe.swipeDown();
                 gestures.clickOnMobileElement(receivedEmail);
             } else {
-               clickOnPromotions();
+                gestures.clickOnMobileElement(navigationDrawer);
+                gestures.clickOnMobileElement(promotionsLabel);
                 waiters.waitForElementVisibility(promotionsText);
                 Swipe.swipeDown();
                 Swipe.swipeDown();
@@ -173,7 +165,7 @@ public void clickOnPromotions(){
             }
         } catch (WebDriverException i) {
             gestures.clickOnMobileElement(navigationDrawer);
-            clickOnPromotions();
+            gestures.clickOnMobileElement(promotionsLabel);
             waiters.waitForElementVisibility(promotionsText);
             Swipe.swipeDown();
             Swipe.swipeDown();
