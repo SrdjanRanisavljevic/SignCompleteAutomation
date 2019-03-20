@@ -67,7 +67,7 @@ public class EmailAddressView extends ScreenView {
     private MobileElement proceedBtn;
 
 
-    public EmailAddressView validateElementsEmailView() {
+    public EmailAddressView validateElementsEmailAddressView() {
         try {
             MyLogger.log.info("Validating elements from Email Address View");
             waiters.waitForElementVisibility(registerPageTitle);
