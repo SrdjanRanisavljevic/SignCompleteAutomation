@@ -9,6 +9,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -230,5 +231,52 @@ public class RegisterSteps {
     }
 
 
+    @Given("^User is in E-mail Address view$")
+    public void userIsInEMailAddressView() {
+        EmailAddressView emailAddressView = new EmailAddressView();
+        emailAddressView.validateElementsEmailAddressView();
+    }
 
+    @And("^Proceeds to Country Selection view$")
+    public void proceedsToCountrySelectionView() {
+        CountrySelectionView countrySelectionView = new CountrySelectionView();
+        countrySelectionView.validateElementsCountrySelectionView();
+    }
+
+    @And("^User is in Birthday Selection view$")
+    public void userIsInBirthdaySelectionView() {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView.validateElementsfromBirthdayScreen();
+    }
+
+    @When("^User proceeds to Consents$")
+    public void userProceedsToConsents() throws IOException, ParseException {
+        ConsentsView consentsView = new ConsentsView();
+        consentsView.validateElementsConsentsView()
+                .clickOnProceedBtn();
+    }
+
+    @And("^User is in Set Up Profile view$")
+    public void userIsInSetUpProfileView() {
+        SetUpProfileView setUpProfileView = new SetUpProfileView();
+        setUpProfileView.validateElementsSetUpProfileView();
+    }
+
+    @And("^User proceeds to Get Magic Link view$")
+    public void userProceedsToGetMagicLinkView() {
+        GetMagicLinkView getMagicLinkView = new GetMagicLinkView();
+        getMagicLinkView.validateElementsGetMagicLinkView();
+    }
+
+    @Then("^User is in Check Email link$")
+    public void userIsInCheckEmailLink() throws FileNotFoundException {
+        CheckMagicLinkView checkMagicLinkView = new CheckMagicLinkView();
+        checkMagicLinkView.validateElementsCheckMagicLinkView();
+    }
+
+    @When("^User puts the app in the background$")
+    public void userPutsTheAppInTheBackground() throws FileNotFoundException {
+        WorkaroundsPhone workarounds = new WorkaroundsPhone();
+        workarounds.putAppInBackground(3);
+    }
 }
