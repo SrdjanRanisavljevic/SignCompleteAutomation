@@ -95,4 +95,10 @@ public class CountrySelectionView extends ScreenView {
     }
 
 
+    public EmailAddressView clickNavigateBackBtn() {
+        MyLogger.log.info("Trying to click on navigate back button to move to Email Address View");
+        ScreenView screenView = utilView.clickOnNavigateBackBtn(new EmailAddressView(), gestures, backBtn);
+        return (EmailAddressView) screenView;
+    }
+
 }

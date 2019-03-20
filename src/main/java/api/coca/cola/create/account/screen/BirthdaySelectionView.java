@@ -14,6 +14,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -175,5 +176,27 @@ public class BirthdaySelectionView extends ScreenView {
         ScreenView screenView = utilView.clickOnProceedButton(new ConsentsView(), gestures, proceedButton);
         return (ConsentsView) screenView;
     }
+
+
+    public BirthdaySelectionView validateDisplayedBirthday(int desiredYear) {
+        try {
+            MyLogger.log.info("Trying to validate the displayed Birthday");
+            waiters.waitForElementVisibility(backBtn);
+            MyLogger.log.info(dateOfBirthInput.getText());
+            Assert.assertTrue("The displayed Birthday does not coincide with the expected Birthday ", dateOfBirthInput.getText().contains(String.valueOf(desiredYear)));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate the displayed Birthday");
+        }
+    }
+
+
+    public CountrySelectionView clickOnNavigateBackBtn() {
+        ScreenView screenView = utilView.clickOnNavigateBackBtn(new CountrySelectionView(), gestures, backBtn);
+        return (CountrySelectionView) screenView;
+    }
+
+
+
 
 }

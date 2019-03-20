@@ -4,6 +4,7 @@ Feature: Register features
     Given User is in Launcher Screen
     And User selects Create Account
 
+
   Scenario: [first uninstall] Register a new user using magic link
     Given User enters a valid e-mail address
     And User selects a country from the list
@@ -15,6 +16,7 @@ Feature: Register features
     And User unlocks the app from received e-mail
     And User skips tutorial
     Then User is in Home View
+
 
   Scenario Outline:  [first uninstall] User is in Home Screen after a successful Register even when interacting with the app
     Given User enters a valid e-mail address
@@ -35,6 +37,7 @@ Feature: Register features
       | puts the app in the background | Home Screen     |
       | closes the app                 | Home Screen     |
 
+
   Scenario: [first uninstall] Register a too young user
     Given User enters a valid e-mail address
     And User selects a country from the list
@@ -52,3 +55,32 @@ Feature: Register features
     Then User is in Home View
 
 
+  Scenario: [first uninstall] Information is being kept when user navigates back from Register screens
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    And User proceeds with Consents
+    And User enters a display name
+    When User clicks back from E-mail Me Magic Link
+    And Validates the name displayed in SetUpProfile screen
+    And User goes back from display name
+    And Validates the selected special offers from Consents screen
+    And User goes back from Consents
+    And User validates the displayed date of birth
+    And User goes back from birth day screen
+    And Validates that a country is still selected
+    When User goes back from Country Selection screen
+    Then User validates the email displayed in Email Address screen
+
+
+  Scenario: [first uninstall] Register a new user using verification code
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    And User proceeds with Consents
+    And User enters a display name
+    When User clicks on E-mail Me Magic Link
+    When User clicks on Enter Code
+    And User enters the verification code
+    And User skips tutorial
+    Then User is in Home View

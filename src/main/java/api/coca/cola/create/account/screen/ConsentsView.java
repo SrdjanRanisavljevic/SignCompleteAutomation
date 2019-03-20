@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ConsentsView extends ScreenView {
@@ -116,6 +117,29 @@ public class ConsentsView extends ScreenView {
         MyLogger.log.info("Trying to click on proceed button");
         ScreenView screenView = utilView.clickOnProceedButton(new SetUpProfileView(), gestures, proceedBtn);
         return (SetUpProfileView) screenView;
+    }
+
+
+    public ConsentsView isPromotionsToggleTicked() throws FileNotFoundException {
+        try {
+            MyLogger.log.info("Trying to see if the promotions toggle is ticked");
+            Swipe.swipeDown();
+            Swipe.swipeDown();
+            Swipe.swipeDown();
+            waiters.waitForElementVisibility(directMarketingCommLabel);
+
+            assertsUtils.isElementDisplayed(directMarketingCommSelectBtnIsTicked);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot check if the promotions toggle is ticked");
+        }
+    }
+
+
+    public BirthdaySelectionView clickOnNavigateBackBtn() {
+        MyLogger.log.info("Trying to click on navigate back button to move to Birthday Selection View");
+        ScreenView screenView=utilView.clickOnNavigateBackBtn(new BirthdaySelectionView(),gestures,backBtn);
+        return (BirthdaySelectionView) screenView;
     }
 
 }

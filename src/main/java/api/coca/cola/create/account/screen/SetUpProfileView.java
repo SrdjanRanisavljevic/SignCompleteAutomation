@@ -12,8 +12,13 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.FileNotFoundException;
+
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 
 public class SetUpProfileView extends ScreenView {
 
@@ -95,6 +100,32 @@ public class SetUpProfileView extends ScreenView {
         ScreenView screenView = utilView.clickOnProceedButton(new GetMagicLinkView(), gestures, proceedBtn);
         return (GetMagicLinkView) screenView;
     }
+
+
+    public SetUpProfileView getDisplayedName(String name) throws FileNotFoundException {
+        try {
+            MyLogger.log.info("Trying to get the displayed input name ");
+            waiters.waitForElementVisibility(backBtn);
+            if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+                Assert.assertTrue("The displayed name does not coincide with the expected name ", displayNameInput.getAttribute("value").equals(name));
+            } else {
+                Assert.assertTrue("The displayed name does not coincide with the expected name ", displayNameInput.getAttribute("name").equals(name));
+            }
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate if the displayed name coincide with the expected name");
+        }
+    }
+
+
+    public ConsentsView clickOnNavigateBackBtn() {
+        MyLogger.log.info("Trying to click on navigate back button to move to Privacy Information View");
+        ScreenView screenView = utilView.clickOnNavigateBackBtn(new ConsentsView(), gestures, backBtn);
+        return (ConsentsView) screenView;
+    }
+
+
+
 
 
 }

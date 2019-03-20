@@ -81,7 +81,7 @@ public class Swipe {
         int height = screenDim.height;
         int width = screenDim.width;
         if (getPlatformUnderTest().getPlatformName().equals("ios")) {
-            MyLogger.log.info("Swipe dowb using iOS Driver");
+            MyLogger.log.info("Swipe down using iOS Driver");
             int x = width / 2;
             double startY = height * 0.30;
             double finalY = height * 0.80;
