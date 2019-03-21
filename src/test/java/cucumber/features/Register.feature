@@ -131,3 +131,21 @@ Feature: Register features
     When User closes the app
     And User open the app
     Then User is in Launcher Screen
+
+
+  Scenario: Verify that user cannot Register with an invalid email address
+    Given User enters invalid email in the email field
+
+      | tccc.janegmail.com    |
+      | tccc.janedoe@gmailcom |
+      | tccc.janedoe          |
+      |                       |
+
+
+  Scenario: User is able to navigate to Privacy Policy from Consents View
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    When User is in Consents View
+    And User clicks on Privacy Notice link
+    Then User is in Privacy Policy View
