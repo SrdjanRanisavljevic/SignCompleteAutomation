@@ -279,4 +279,10 @@ public class RegisterSteps {
         WorkaroundsPhone workarounds = new WorkaroundsPhone();
         workarounds.putAppInBackground(3);
     }
+
+    @When("^User closes the app$")
+    public void userClosesTheApp() throws FileNotFoundException {
+        WorkaroundsPhone workarounds = new WorkaroundsPhone();
+        workarounds.closeApp();
+    }
 }

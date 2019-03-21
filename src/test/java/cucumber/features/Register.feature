@@ -85,6 +85,7 @@ Feature: Register features
     And User skips tutorial
     Then User is in Home View
 
+
   Scenario: [first uninstall] Validate that register elements are displayed in relevant screens
     Given User is in E-mail Address view
     And User enters a valid e-mail address
@@ -98,6 +99,7 @@ Feature: Register features
     And User proceeds to Get Magic Link view
     When User clicks on E-mail Me Magic Link
     Then User is in Check Email link
+
 
   Scenario: Information is being kept if the user puts the app in background
     Given User enters a valid e-mail address
@@ -117,3 +119,15 @@ Feature: Register features
     And Validates that a country is still selected
     When User goes back from Country Selection screen
     Then User validates the email displayed in Email Address screen
+
+
+  Scenario: [first uninstall] Information is not kept when user closes the app and relaunches it
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    And User proceeds with Consents
+    And User enters a display name
+    And User clicks back from E-mail Me Magic Link
+    When User closes the app
+    And User open the app
+    Then User is in Launcher Screen
