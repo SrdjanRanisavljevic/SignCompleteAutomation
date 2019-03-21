@@ -1,5 +1,6 @@
 package api.coca.cola.create.account.screen;
 
+import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.utils.screen.views.ScreenView;
 import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
@@ -141,5 +142,17 @@ public class ConsentsView extends ScreenView {
         ScreenView screenView=utilView.clickOnNavigateBackBtn(new BirthdaySelectionView(),gestures,backBtn);
         return (BirthdaySelectionView) screenView;
     }
+
+
+    public CocaColaWebView clickOnPrivacyNotice() {
+        try {
+            MyLogger.log.info("Trying to click on Privacy Notice");
+            gestures.clickOnMobileElement(privacyNotice);
+            return new CocaColaWebView();
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Privacy Notice");
+        }
+    }
+
 
 }

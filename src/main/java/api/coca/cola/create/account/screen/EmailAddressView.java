@@ -66,6 +66,10 @@ public class EmailAddressView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/next_lottie_button\")")
     private MobileElement proceedBtn;
 
+    @iOSXCUITFindBy(accessibility = "LoginInputConfirmButton")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/textinput_error\")")
+    private MobileElement textInputError;
+
 
     public EmailAddressView validateElementsEmailAddressView() {
         try {
@@ -132,5 +136,23 @@ public class EmailAddressView extends ScreenView {
     }
 
 
+    public EmailAddressView clickRegisterEmailForWrongEnteredEmail() {
+        MyLogger.log.info("Trying to click on proceed button on Email Address view");
+        ScreenView screenView = utilView.clickOnProceedButton(new EmailAddressView(), gestures, proceedBtn);
+        return (EmailAddressView) screenView;
+    }
+
+
+    public EmailAddressView validateWrongEmailInput() {
+        try {
+            MyLogger.log.info("Verifying that invalid email error is displayed when filling a wrong email address format");
+            waiters.waitForElementVisibility(textInputError);
+            assertsUtils.isElementDisplayed(textInputError);
+            Assert.assertTrue("The email address format is correct", textInputError.getAttribute("name").equals("Invalid email address"));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot verify invalid email address error is displayed when filling a wrong email address format");
+        }
+    }
 
 }

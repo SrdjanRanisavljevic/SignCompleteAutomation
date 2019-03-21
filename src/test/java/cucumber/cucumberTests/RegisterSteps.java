@@ -3,8 +3,10 @@ package cucumber.cucumberTests;
 import api.coca.cola.create.account.screen.*;
 import api.coca.cola.home.screen.HomeView;
 import api.coca.cola.launcher.screen.LauncherView;
+import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.tutorial.screen.TutorialScanView;
 import api.coca.cola.utils.workarounds.WorkaroundsPhone;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,7 +15,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class RegisterSteps {
@@ -285,4 +289,43 @@ public class RegisterSteps {
         WorkaroundsPhone workarounds = new WorkaroundsPhone();
         workarounds.closeApp();
     }
+
+    @Given("^User enters invalid email in the email field$")
+    public void userEntersInvalidEmailInTheEmailField(DataTable table) throws FileNotFoundException {
+        EmailAddressView emailAddressView = new EmailAddressView();
+
+        List<String> emails = table.asList(String.class);
+
+        for (int i = 0; i <= emails.size() - 1; i++) {
+            String email = emails.get(i);
+            emailAddressView.sendTextAlreadyRegisteredEmail(email)
+                    .clickRegisterEmailForWrongEnteredEmail();
+            if (getPlatformUnderTest().getPlatformName().equals("android")) {
+                emailAddressView.validateWrongEmailInput();
+            } else {
+                emailAddressView.validateElementsEmailAddressView();
+            }
+        }
+    }
+
+    @When("^User is in Consents View$")
+    public void userIsInConsentsView() {
+        ConsentsView consentsView = new ConsentsView();
+        consentsView.validateElementsConsentsView();
+    }
+
+    @And("^User clicks on Privacy Notice link$")
+    public void userClicksOnPrivacyNoticeLink() {
+        ConsentsView consentsView = new ConsentsView();
+        consentsView.clickOnPrivacyNotice();
+    }
+
+    @Then("^User is in Privacy Policy View$")
+    public void userIsInPrivacyPolicyView() {
+        CocaColaWebView cocaColaWebView = new CocaColaWebView();
+        cocaColaWebView.validateElementsFromCocaColaWebView();
+    }
+
+
+
 }
