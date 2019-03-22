@@ -1,5 +1,6 @@
 package api.coca.cola.create.account.screen;
 
+import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.utils.screen.views.ScreenView;
 import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
@@ -118,6 +119,27 @@ public class GetMagicLinkView extends ScreenView {
         return (SetUpProfileView) screenView;
     }
 
+    public CocaColaWebView clickOnPrivacyPolicy() {
+        try {
+            MyLogger.log.info("Trying to click on Privacy Policy button");
+            gestures.clickOnMobileElement(privacyPolicyBtn);
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Privacy Policy button");
+        }
+        return new CocaColaWebView();
+
+    }
+
+    public CocaColaWebView clickOnTermsOfService() {
+        try {
+            MyLogger.log.info("Trying to click on Terms of Service button");
+            gestures.clickOnMobileElement(termsOfServiceBtn);
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Terms of Service button");
+        }
+        return new CocaColaWebView();
+
+    }
 
 
 }
