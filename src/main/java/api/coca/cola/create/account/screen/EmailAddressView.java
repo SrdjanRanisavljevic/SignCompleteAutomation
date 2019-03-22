@@ -91,7 +91,7 @@ public class EmailAddressView extends ScreenView {
     public EmailAddressView sendTextEmailAddress(String email) {
         try {
 
-            String emails = JavaHelpers.typeRandomNumbers(4) + "@gmail.com";
+            String emails = JavaHelpers.typeRandomNumbers(8) + "@gmail.com";
             MyLogger.log.info("Trying to send text: " + emails + "@gmail.com");
             gestures.sendText(emailInput, email + emails);
             return this;

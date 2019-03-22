@@ -7,10 +7,7 @@ import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.tutorial.screen.TutorialScanView;
 import api.coca.cola.utils.workarounds.WorkaroundsPhone;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
@@ -28,6 +25,7 @@ public class RegisterSteps {
     private int currentYear = 2000;
     private int desiredYearForTooYoungUser = 2010;
     private String usermail = runningSetup().getUsermail();
+    private int desiredYearForAMinimumAge = 2004;
 
 
     public RegisterSteps() throws FileNotFoundException {
@@ -166,7 +164,7 @@ public class RegisterSteps {
         getMagicLinkView.clickOnNavigateBackBtn();
     }
 
-        @And("^Validates the name displayed in SetUpProfile screen$")
+    @And("^Validates the name displayed in SetUpProfile screen$")
     public void validatesTheNameDisplayedInSetUpProfileScreen() throws FileNotFoundException {
         SetUpProfileView setUpProfileView = new SetUpProfileView();
         setUpProfileView.getDisplayedName(name);
@@ -327,5 +325,41 @@ public class RegisterSteps {
     }
 
 
+    @And("^User is in GetMagicLink View$")
+    public void userIsInGetMagicLinkView() {
+        GetMagicLinkView getMagicLinkView = new GetMagicLinkView();
+        getMagicLinkView.validateElementsGetMagicLinkView();
+    }
 
+    @And("^User clicks on Privacy Policy link$")
+    public void userClicksOnPrivacyPolicyLink() {
+        GetMagicLinkView getMagicLinkVie = new GetMagicLinkView();
+        getMagicLinkVie.clickOnPrivacyPolicy();
+    }
+
+    @But("^User clicks on X button$")
+    public void userClicksOnXButton() {
+        CocaColaWebView cocaColaWebView = new CocaColaWebView();
+        cocaColaWebView.clickOnCloseBtn();
+    }
+
+    @When("^User clicks on Terms of Service$")
+    public void userClicksOnTermsOfService() {
+        GetMagicLinkView getMagicLinkView = new GetMagicLinkView();
+        getMagicLinkView.clickOnTermsOfService();
+    }
+
+    @Then("^User is in Terms of Service View$")
+    public void userIsInTermsOfServiceView() {
+        TermsOfService termsOfService = new TermsOfService();
+        termsOfService.validateElementsPrivacyInformationView()
+                .clickOnCloseBtn();
+    }
+
+    @And("^User enters birth date for minimum age$")
+    public void userEntersBirthDateForMinimumAge() {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView.selectYear(currentYear, desiredYearForAMinimumAge)
+                .clickOnProceedBtn();
+    }
 }

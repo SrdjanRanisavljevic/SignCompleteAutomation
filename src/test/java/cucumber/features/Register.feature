@@ -149,3 +149,24 @@ Feature: Register features
     When User is in Consents View
     And User clicks on Privacy Notice link
     Then User is in Privacy Policy View
+
+
+  Scenario: User can navigate to Privacy Policy and Terms of Service from GetMagicLink View
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    When User proceeds with Consents
+    And User enters a display name
+    And User is in GetMagicLink View
+    And User clicks on Privacy Policy link
+    And User is in Privacy Policy View
+    But User clicks on X button
+    And User is in GetMagicLink View
+    When User clicks on Terms of Service
+    Then User is in Terms of Service View
+
+  Scenario: Set Up Profile view is displayed after user selects a date that gives him minimum age allowed for the selected country
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date for minimum age
+    Then User is in Set Up Profile view
