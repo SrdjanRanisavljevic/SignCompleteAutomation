@@ -2,6 +2,8 @@ package api.coca.cola.email.screen;
 
 import api.drivers.Drivers;
 import core.classic.methods.Gestures;
+import core.classic.methods.MobileGestures;
+import core.classic.methods.Swipe;
 import core.classic.methods.Waiters;
 import core.watchers.MyLogger;
 import io.appium.java_client.AppiumDriver;
@@ -42,6 +44,9 @@ public class EmailViewPixel extends PrivateEmailViewAos implements EmailView {
     @AndroidFindBy(xpath = "//android.support.v7.widget.RecyclerView/android.view.View[1]")
     private MobileElement receivedEmail;
 
+    @AndroidFindBy(xpath = "//android.support.v7.widget.RecyclerView/android.view.View[2]")
+    private MobileElement oldReceivedEmail;
+
     @AndroidFindBy(uiAutomator = "new UiSelector().descriptionContains(\"Navigate up\")")
     private MobileElement backFromEmailRead;
 
@@ -71,6 +76,9 @@ public class EmailViewPixel extends PrivateEmailViewAos implements EmailView {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/list\")")
     private MobileElement emailList;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.google.android.gm:id/conversation_list_folder_name\")")
+    private MobileElement promotionsText;
 
 
     @Override
@@ -130,5 +138,58 @@ public class EmailViewPixel extends PrivateEmailViewAos implements EmailView {
         }
     }
 
+    @Override
+    public void openOldEmail() throws IOException, ParseException {
+        try {
+            MyLogger.log.info("Trying to open received e-mail from Magic Link activation");
+            if (runningSetup().getPlatformName().equalsIgnoreCase("android")) {
+
+                try {
+                    if (backFromEmailRead.isDisplayed()) {
+                        gestures.clickOnMobileElement(backFromEmailRead);
+                        navigationDrawerOldEmail();
+                        expandTextFromEmail();
+                    }
+                } catch (WebDriverException e) {
+                    navigationDrawerOldEmail();
+                    expandTextFromEmail();
+                }
+
+            }
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot open received e-mail from Magic Link activation");
+        }
+    }
+
+    public void navigationDrawerOldEmail() throws IOException {
+        MyLogger.log.info("Trying to click on navigation drawer");
+        try {
+            if (emailList.isDisplayed()) {
+                MobileGestures.tapOutsideTheEmailListBox(emailList);
+                gestures.clickOnMobileElement(navigationDrawer);
+                gestures.clickOnMobileElement(promotionsLabel);
+                waiters.waitForElementVisibility(promotionsText);
+                Swipe.swipeDown();
+                Swipe.swipeDown();
+                gestures.clickOnMobileElement(oldReceivedEmail);
+            } else {
+                gestures.clickOnMobileElement(navigationDrawer);
+                gestures.clickOnMobileElement(promotionsLabel);
+                waiters.waitForElementVisibility(promotionsText);
+                Swipe.swipeDown();
+                Swipe.swipeDown();
+                gestures.clickOnMobileElement(oldReceivedEmail);
+
+            }
+        } catch (WebDriverException i) {
+            gestures.clickOnMobileElement(navigationDrawer);
+            gestures.clickOnMobileElement(promotionsLabel);
+            waiters.waitForElementVisibility(promotionsText);
+            Swipe.swipeDown();
+            Swipe.swipeDown();
+            gestures.clickOnMobileElement(oldReceivedEmail);
+
+        }
+    }
 
 }

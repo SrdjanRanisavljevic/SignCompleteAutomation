@@ -56,6 +56,12 @@ public class Waiters {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForMobileElementToBeClickable(MobileElement element) {
+        WebDriverWait wait = new WebDriverWait(Drivers.getMobileDriver(), 30);
+        wait.ignoring(NoSuchElementException.class)
+                .pollingEvery(Duration.ofMillis(500))
+                .until(ExpectedConditions.elementToBeClickable(element));
+    }
 
     public boolean waitForInvisibility(By element, int timeOut) {
         try {

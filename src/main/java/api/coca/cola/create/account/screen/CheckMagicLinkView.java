@@ -30,6 +30,7 @@ public class CheckMagicLinkView extends ScreenView {
     private final Waiters waiters = new Waiters();
     private final AssertsUtils assertsUtils = new AssertsUtils();
     private final Gestures gestures = new Gestures();
+    private final CheckingMails checkingMails = new CheckingMails();
 
 
     /**
@@ -75,6 +76,21 @@ public class CheckMagicLinkView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Gmail\")")
     private MobileElement gMail;
 
+    /**
+     * Send Link Again Pop-up Elements
+     */
+
+    @iOSXCUITFindBy(accessibility = "New Magic Link is on the way!")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_text\")")
+    private MobileElement newMagicLinkLabel;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] 'If you are using Gmail'")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_subtext\")")
+    private MobileElement newMagicLinkDescription;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"CHECK EMAIL\"]")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_two\")")
+    private MobileElement newMagicLinkCheckEmailBtn;
 
     /**
      * Elements for an already registered user
@@ -107,6 +123,14 @@ public class CheckMagicLinkView extends ScreenView {
     @iOSXCUITFindBy(accessibility = "Login")
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/text_confirm\")")
     private MobileElement proceedBtn;
+
+    /**
+     * Elements for error message
+     */
+
+    @iOSXCUITFindBy(accessibility = "Verification failed")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Server did not return user data\")")
+    private MobileElement errorMessageLabel;
 
 
     public CheckMagicLinkView validateElementsCheckMagicLinkView() {
@@ -195,6 +219,67 @@ public class CheckMagicLinkView extends ScreenView {
         return this;
     }
 
+    public CheckMagicLinkView validateElementsFromSendLinkAgainPopUp() {
+        try {
+            MyLogger.log.info("Validating elements from Send Link Again pop up");
+            waiters.waitForElementVisibility(newMagicLinkLabel);
+            assertsUtils.isElementDisplayed(newMagicLinkLabel);
+            assertsUtils.isElementDisplayed(newMagicLinkDescription);
+            assertsUtils.isElementDisplayed(newMagicLinkCheckEmailBtn);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate elements from Send Link Again pop up");
+        }
+    }
 
+    public CheckMagicLinkView clickOnSendLinkAgainBtn() {
+        try {
+            MyLogger.log.info("Trying to click on Send Link Again button");
+            waiters.waitForMobileElementToBeClickable(sendLinkAgainBtn);
+            try {
+                if (sendLinkAgainBtn.isEnabled()) {
+                    gestures.clickOnMobileElement(sendLinkAgainBtn);
+                }
+            } catch (WebDriverException e) {
+                gestures.clickOnMobileElement(sendLinkAgainBtn);
 
+            }
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Send Link Again button");
+        }
+    }
+
+    public CheckMagicLinkView clickOnCheckEmailBtnFromSendLinkAgain() {
+        try {
+            MyLogger.log.info("Trying to click on Check Email button from Send Link Again");
+            gestures.clickOnMobileElement(newMagicLinkCheckEmailBtn);
+            try {
+                MyLogger.log.info("Trying to click on Gmail App");
+                if (gMail.isDisplayed()) {
+                    gestures.clickOnMobileElement(gMail);
+                }
+            } catch (WebDriverException e) {
+                MyLogger.log.info("Cannot click on Gmail App");
+            }
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Check Email button from Send Link Again");
+        }
+    }
+
+    public CheckMagicLinkView validateErrorMessageReceivedFromOldEmail() throws FileNotFoundException {
+        try {
+            MyLogger.log.info("Try to validate the message displayed after accessing the app from an old email");
+            waiters.waitForElementVisibility(errorMessageLabel);
+            if (runningSetup().getPlatformName().equalsIgnoreCase("android")) {
+                Assert.assertTrue("The user is able to access the app from an old email", errorMessageLabel.getAttribute("name").contains("Server did not return user data"));
+            } else {
+                Assert.assertTrue("The user is able to access the app from an old email", errorMessageLabel.getAttribute("value").contains("Verification failed"));
+            }
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate the message displayed after accessing the app from an old email");
+        }
+    }
 }

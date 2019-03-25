@@ -33,4 +33,8 @@ public class EmailViewManager {
         getOs().clickActivateAppFromEmail();
     }
 
-}
+    public void openOldReceivedEmail() throws IOException, ParseException{
+        getOs().openOldEmail();
+    }
+
+   }
