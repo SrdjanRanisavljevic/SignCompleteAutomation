@@ -12,6 +12,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
@@ -33,6 +34,9 @@ public class PrivateEmailViewIos implements EmailView {
 
     @iOSXCUITFindBy(iOSNsPredicate = "type== 'XCUIElementTypeCell' AND name BEGINSWITH[c] 'Unread'")
     private MobileElement receivedEmail;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type== 'XCUIElementTypeCell' AND name BEGINSWITH[c] 'noreply'")
+    private MobileElement oldReceivedEmail;
 
     @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeButton' AND name CONTAINS[c] 'Inbox'")
     private MobileElement backFromEmailRead;
@@ -77,6 +81,30 @@ public class PrivateEmailViewIos implements EmailView {
             }
         } catch (WebDriverException e) {
             throw new AssertionError("Cannot activate app from received e-mail from Magic Link");
+        }
+    }
+
+    @Override
+    public void openOldEmail() throws FileNotFoundException {
+        try {
+            MyLogger.log.info("Trying to open received e-mail from Magic Link activation");
+            if (runningSetup().getPlatformName().equalsIgnoreCase("ios")) {
+                try {
+                    if (proceedFromEmail.isDisplayed()) {
+                        gestures.clickOnMobileElement(backFromEmailRead);
+                        Swipe.swipeDown();
+                        Swipe.swipeDown();
+                        gestures.clickOnMobileElement(oldReceivedEmail);
+                    }
+                } catch (WebDriverException e) {
+                    Swipe.swipeDown();
+                    Swipe.swipeDown();
+                    gestures.clickOnMobileElement(oldReceivedEmail);
+                }
+
+            }
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot open received e-mail from Magic Link activation");
         }
     }
 }

@@ -170,3 +170,27 @@ Feature: Register features
     And User selects a country from the list
     And User enters birth date for minimum age
     Then User is in Set Up Profile view
+
+  Scenario: [first uninstall] Verify that user can request a new magic link
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    And User proceeds with Consents
+    And User enters a display name
+    And User clicks on E-mail Me Magic Link
+    And User clicks on Send Link Again
+    And User receives a new magic link notification
+    And User unlocks the app from received e-mail
+    And User skips tutorial
+    Then User is in Home View
+
+  Scenario: [first uninstall] Verify that an error message is displayed when opening a wrong email with the magic link
+    Given User enters a valid e-mail address
+    And User selects a country from the list
+    And User enters birth date
+    And User proceeds with Consents
+    And User enters a display name
+    And User clicks on E-mail Me Magic Link
+    And User clicks Check E-mail from Magic Link
+    When User tries to unlock the app from an old received e-mail
+    Then An error message is displayed when unlocking the app from an old received e-mail

@@ -10,4 +10,7 @@ public interface EmailView {
 
     public abstract void clickActivateAppFromEmail();
 
+    public abstract void openOldEmail() throws IOException, ParseException;
+
+
 }
