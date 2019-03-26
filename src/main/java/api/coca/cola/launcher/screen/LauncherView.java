@@ -16,6 +16,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileNotFoundException;
+
 
 public class LauncherView {
 
@@ -73,7 +75,7 @@ public class LauncherView {
             MyLogger.log.info("Trying to click on Login Category button");
             gestures.clickOnMobileElement(login);
             return new LoginView();
-        } catch (WebDriverException e) {
+        } catch (WebDriverException | FileNotFoundException e) {
             throw new AssertionError("Cannot click on Login Category button from Launcher screen");
         }
     }
