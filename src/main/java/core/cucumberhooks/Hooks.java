@@ -1,4 +1,4 @@
-package cucumber.cucumberhooks;
+package core.cucumberhooks;
 
 import api.drivers.Drivers;
 import core.helpers.ADB;
@@ -15,6 +15,7 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 
 import static core.helpers.NetworkHelpers.getConnectionStatus;
 import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
@@ -23,6 +24,7 @@ import static core.watchers.MobileTestWatcher.*;
 import static core.watchers.ScreenshotFailedTests.screenshotFailedTestCucumber;
 
 public class Hooks {
+    public static Date testStartDate;
 
     @Before(order = 1)
     public void uninstallTheApp(Scenario scenario) throws IOException, InterruptedException {
@@ -42,12 +44,23 @@ public class Hooks {
         }
     }
 
+    @Before(order = 0)
+    public Date scenarioStartDate() {
+        Date scenarioStartDate = new Date();
+        testStartDate = scenarioStartDate;
+        MyLogger.log.info("The scenario started at: " + testStartDate);
+
+        return scenarioStartDate;
+
+    }
 
     @Before(order = 2)
-    public void starting(Scenario scenario) {
+    public void startScenario(Scenario scenario) {
+
         synchronized (this) {
             startedTests++;
         }
+
         MyLogger.log.info("+++++++++++++ Starting test +++++++++++++");
         MyLogger.log.info("+++++++++++++ " + scenario.getId() + " +++++++++++++");
         MyLogger.log.info("+++++++++++++ " + scenario.getName() + " +++++++++++++");

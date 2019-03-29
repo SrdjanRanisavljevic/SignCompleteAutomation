@@ -19,6 +19,7 @@ public class AppiumReadJsonResults {
     private String OSversion;
     private String name;
     private String prefixEmail;
+    private String unregisteredEmail;
 
     /**
      * Server/App Capabilities - Android
@@ -409,5 +410,13 @@ public class AppiumReadJsonResults {
 
     public String getPrefixEmail() {
         return prefixEmail;
+    }
+
+    public void setUnregisteredEmail(String unregisteredEmail) {
+        this.unregisteredEmail = unregisteredEmail;
+    }
+
+    public String getUnregisteredEmail() {
+        return unregisteredEmail;
     }
 }

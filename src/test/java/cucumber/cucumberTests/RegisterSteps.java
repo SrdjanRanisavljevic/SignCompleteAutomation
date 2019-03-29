@@ -1,7 +1,7 @@
 package cucumber.cucumberTests;
 
 import api.coca.cola.create.account.screen.*;
-import api.coca.cola.email.screen.CheckingMails;
+import api.coca.cola.email.screen.EmailViewManager;
 import api.coca.cola.home.screen.HomeView;
 import api.coca.cola.launcher.screen.LauncherView;
 import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
@@ -384,4 +384,9 @@ public class RegisterSteps {
     }
 
 
+    @And("^User validates that the email was received$")
+    public void userValidatesThatTheEmailWasReceived() throws Exception {
+        EmailViewManager emailView = new EmailViewManager();
+        emailView.validateThatAnEmailWasReceived();
+    }
 }
