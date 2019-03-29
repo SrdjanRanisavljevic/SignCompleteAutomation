@@ -37,12 +37,6 @@ public class LoginSteps {
     }
 
 
-    @Given("^User enters an unregistered e-mail address$")
-    public void userEntersAnUnregisteredEMailAddress() throws FileNotFoundException {
-        LoginView loginView = new LoginView();
-        loginView.sendTextEmailAddressUsingString("tccc.johnsnow@gmail.com");
-    }
-
     @When("^User clicks on try again$")
     public void userClicksOnTryAgain() throws FileNotFoundException {
         LoginView loginView = new LoginView();
