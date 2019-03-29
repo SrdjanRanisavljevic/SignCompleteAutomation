@@ -8,12 +8,19 @@ import core.classic.methods.Gestures;
 import core.classic.methods.Waiters;
 import core.watchers.MyLogger;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class CountrySelectionView extends ScreenView {
 
@@ -59,6 +66,10 @@ public class CountrySelectionView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/next_lottie_button\")")
     private MobileElement proceedBtn;
 
+//    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\")")
+    private MobileElement countryList;
+
 
     public CountrySelectionView validateElementsCountrySelectionView() {
         try {
@@ -100,5 +111,35 @@ public class CountrySelectionView extends ScreenView {
         ScreenView screenView = utilView.clickOnNavigateBackBtn(new EmailAddressView(), gestures, backBtn);
         return (EmailAddressView) screenView;
     }
+
+
+    public CountrySelectionView chooseDesiredCountry(String desiredCountry) throws FileNotFoundException {
+
+        MyLogger.log.info("Trying to select the desired country: " + desiredCountry);
+
+        if (runningSetup().getPlatformName().equals("android")) {
+
+            List<MobileElement> countryListElements = countryList.findElements(By.className("android.widget.TextView"));
+            for (int i = 0; i < countryListElements.size(); i++) {
+                if (countryListElements.get(i).getText().equalsIgnoreCase(desiredCountry)) {
+                    countryListElements.get(i).click();
+                }
+            }
+
+        } else {
+
+            MobileElement countryList = (MobileElement) Drivers.getMobileDriver().findElement(By.xpath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable"));
+            List<MobileElement> countries = countryList.findElements(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText'"));
+            for (MobileElement country : countries) {
+                if (country.getAttribute("name").equalsIgnoreCase(desiredCountry)) {
+                    country.click();
+                    break;
+                }
+            }
+        }
+        return this;
+    }
+
+
 
 }

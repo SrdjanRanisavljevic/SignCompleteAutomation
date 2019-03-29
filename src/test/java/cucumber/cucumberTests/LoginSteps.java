@@ -5,6 +5,8 @@ import api.coca.cola.login.screen.LoginView;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 
 import java.io.FileNotFoundException;
 
@@ -41,6 +43,17 @@ public class LoginSteps {
         loginView.clickProceedWithLogin();
     }
 
+    @When("^User clicks on try again$")
+    public void userClicksOnTryAgain() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.clickOnTryAgainBtn();
+    }
+
+    @Then("^User is able to retype the e-mail address$")
+    public void userIsAbleToRetypeTheEMailAddress() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.sendTextEmailAddressUsingJson();
+    }
 
     @Given("^User enters an unregistered e-mail address$")
     public void userEntersAnUnregisteredEMailAddress() throws FileNotFoundException {
@@ -54,3 +67,4 @@ public class LoginSteps {
         loginView.validateWrongEmailNotification();
     }
 }
+

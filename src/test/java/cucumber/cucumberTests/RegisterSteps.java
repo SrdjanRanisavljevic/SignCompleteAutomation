@@ -384,9 +384,31 @@ public class RegisterSteps {
     }
 
 
+    @And("^User selects a \"([^\"]*)\" in the \"([^\"]*)\" field$")
+    public void userSelectsAInTheField(String arg0, String arg1) throws Throwable {
+        CountrySelectionView countrySelectionView = new CountrySelectionView();
+        if (arg1.equals("country")) {
+            countrySelectionView.chooseDesiredCountry(arg0)
+                    .clickOnProceedButton();
+        }
+    }
+
+
+    @And("^User enters a \"([^\"]*)\" in the \"([^\"]*)\" field$")
+    public void userEntersAInTheField(int arg0, String arg1) throws Throwable {
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        if (arg1.equals("birth date year")) {
+            birthdaySelectionView
+                    .selectYear(currentYear, arg0)
+                    .clickOnProceedBtn();
+        }
+    }
+
     @And("^User validates that the email was received$")
     public void userValidatesThatTheEmailWasReceived() throws Exception {
         EmailViewManager emailView = new EmailViewManager();
         emailView.validateThatAnEmailWasReceived();
+
     }
 }
+

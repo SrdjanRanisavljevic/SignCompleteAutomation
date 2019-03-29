@@ -199,3 +199,15 @@ Feature: Register features
     And User clicks Check E-mail from Magic Link
     When User tries to unlock the app from an old received e-mail
     Then An error message is displayed when unlocking the app from an old received e-mail
+
+
+  Scenario Outline: [first uninstall] User cannot register if the age is under the age limit
+    Given User enters a valid e-mail address
+    And User selects a "<country>" in the "country" field
+    And User enters a "<birth date year>" in the "birth date year" field
+    Then User is notified that he is too young to register
+    Examples:
+      | country     | birth date year |
+      | Russia      | 2008            |
+      | Switzerland | 2007            |
+      | Ukraine     | 2006            |

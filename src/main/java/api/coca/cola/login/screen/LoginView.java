@@ -89,6 +89,7 @@ public class LoginView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_two\")")
     private MobileElement registerBtn;
 
+
     public LoginView validateElementsLoginScreen() {
         try {
             MyLogger.log.info("Validating elements from Login Screen");
@@ -133,6 +134,7 @@ public class LoginView {
         }
     }
 
+
     public LoginView validateWrongEmailNotification() {
         try {
             MyLogger.log.info("Validate wrong email notification is displayed and elements are displayed");
@@ -145,6 +147,17 @@ public class LoginView {
             return this;
         } catch (WebDriverException e) {
             throw new AssertionError("Cannot validate wrong email notification is displayed and elements are displayed");
+        }
+    }
+
+
+    public LoginView clickOnTryAgainBtn() {
+        try {
+            MyLogger.log.info("Trying to click on Try Again button");
+            gestures.clickOnMobileElement(tryAgainBtn);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Try Again button");
         }
     }
 
