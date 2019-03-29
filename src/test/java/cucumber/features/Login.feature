@@ -9,7 +9,7 @@ Feature: Login features
     Given The elements from Login screen are displayed
 
 
-  Scenario: first uninstall] Verify that user can login with valid credentials
+  Scenario: [first uninstall] Verify that user can login with valid credentials
     Given User enters a registered e-mail address
     And User clicks on proceed with Login
     And User clicks Check E-mail from Magic Link
@@ -18,3 +18,8 @@ Feature: Login features
     Then User is in Home View
 
 
+  Scenario: [first uninstall Verify that user can retype the email address after unsuccessful login
+    Given User enters an unregistered e-mail address
+    And User clicks on proceed with Login
+    When User clicks on try again
+    Then User is able to retype the e-mail address

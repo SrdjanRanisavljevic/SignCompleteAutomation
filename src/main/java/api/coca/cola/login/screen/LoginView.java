@@ -68,6 +68,27 @@ public class LoginView {
     private MobileElement proceedBtn;
 
 
+    /**
+     * Wrong Email Elements from Pop-up
+     */
+
+    @iOSXCUITFindBy(accessibility = "Wrong Email")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_text\")")
+    private MobileElement wrongEmailLabel;
+
+    @iOSXCUITFindBy(accessibility = "Hey, it looks like we have never seen this email before!")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_subtext\")")
+    private MobileElement wrongEmailDescription;
+
+    @iOSXCUITFindBy(accessibility = "TRY AGAIN")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_one\")")
+    private MobileElement tryAgainBtn;
+
+    @iOSXCUITFindBy(accessibility = "REGISTER")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_two\")")
+    private MobileElement registerBtn;
+
+
     public LoginView validateElementsLoginScreen() {
         try {
             MyLogger.log.info("Validating elements from Login Screen");
@@ -102,5 +123,26 @@ public class LoginView {
         return (CheckMagicLinkView) screenView;
     }
 
+
+    public LoginView sendTextEmailAddressUsingString(String email) {
+        try {
+            MyLogger.log.info("Trying to send text: " + email + " to e-mail address input");
+            gestures.sendText(emailInput, email);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot send text: " + email + " to e-mail address input");
+        }
+    }
+
+
+    public LoginView clickOnTryAgainBtn() {
+        try {
+            MyLogger.log.info("Trying to click on Try Again button");
+            gestures.clickOnMobileElement(tryAgainBtn);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Try Again button");
+        }
+    }
 
 }
