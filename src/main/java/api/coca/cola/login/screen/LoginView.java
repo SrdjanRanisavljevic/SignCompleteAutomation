@@ -13,6 +13,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
@@ -68,6 +69,26 @@ public class LoginView {
     private MobileElement proceedBtn;
 
 
+    /**
+     * Wrong Email Elements from Pop-up
+     */
+
+    @iOSXCUITFindBy(accessibility = "Wrong Email")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_text\")")
+    private MobileElement wrongEmailLabel;
+
+    @iOSXCUITFindBy(accessibility = "Hey, it looks like we have never seen this email before!")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/plain_dialog_subtext\")")
+    private MobileElement wrongEmailDescription;
+
+    @iOSXCUITFindBy(accessibility = "TRY AGAIN")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_one\")")
+    private MobileElement tryAgainBtn;
+
+    @iOSXCUITFindBy(accessibility = "REGISTER")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/dialog_button_two\")")
+    private MobileElement registerBtn;
+
     public LoginView validateElementsLoginScreen() {
         try {
             MyLogger.log.info("Validating elements from Login Screen");
@@ -102,5 +123,29 @@ public class LoginView {
         return (CheckMagicLinkView) screenView;
     }
 
+    public LoginView sendTextEmailAddressUsingString(String email) {
+        try {
+            MyLogger.log.info("Trying to send text: " + email + " to e-mail address input");
+            gestures.sendText(emailInput, email);
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot send text: " + email + " to e-mail address input");
+        }
+    }
+
+    public LoginView validateWrongEmailNotification() {
+        try {
+            MyLogger.log.info("Validate wrong email notification is displayed and elements are displayed");
+            waiters.waitForElementVisibility(wrongEmailLabel);
+            assertsUtils.isElementDisplayed(wrongEmailLabel);
+            assertsUtils.isElementDisplayed(wrongEmailDescription);
+            assertsUtils.isElementDisplayed(tryAgainBtn);
+            assertsUtils.isElementDisplayed(registerBtn);
+            Assert.assertTrue("The email address is already registered", wrongEmailDescription.getAttribute("name").equals("Hey, it looks like we have never seen this email before!"));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate wrong email notification is displayed and elements are displayed");
+        }
+    }
 
 }

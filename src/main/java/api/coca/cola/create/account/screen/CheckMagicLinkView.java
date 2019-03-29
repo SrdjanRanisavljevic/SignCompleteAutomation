@@ -30,7 +30,6 @@ public class CheckMagicLinkView extends ScreenView {
     private final Waiters waiters = new Waiters();
     private final AssertsUtils assertsUtils = new AssertsUtils();
     private final Gestures gestures = new Gestures();
-    private final CheckingMails checkingMails = new CheckingMails();
 
 
     /**
