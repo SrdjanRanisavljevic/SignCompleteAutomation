@@ -13,6 +13,7 @@ Feature: Register features
     And User enters a display name
     When User clicks on E-mail Me Magic Link
     And User clicks Check E-mail from Magic Link
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     Then User is in Home View
@@ -26,6 +27,7 @@ Feature: Register features
     And User enters a display name
     When User clicks on E-mail Me Magic Link
     And User clicks Check E-mail from Magic Link
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     And User is in Home View
@@ -50,6 +52,7 @@ Feature: Register features
     Then User is in Check E-mail Screen
     And User is recognized as to be already registered
     When User clicks Check E-mail from Magic Link
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     Then User is in Home View
@@ -80,6 +83,7 @@ Feature: Register features
     And User proceeds with Consents
     And User enters a display name
     When User clicks on E-mail Me Magic Link
+    And User validates that the email was received
     When User clicks on Enter Code
     And User enters the verification code
     And User skips tutorial
@@ -180,6 +184,7 @@ Feature: Register features
     And User clicks on E-mail Me Magic Link
     And User clicks on Send Link Again
     And User receives a new magic link notification
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     Then User is in Home View

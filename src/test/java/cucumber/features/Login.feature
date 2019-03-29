@@ -13,9 +13,11 @@ Feature: Login features
     Given User enters a registered e-mail address
     And User clicks on proceed with Login
     And User clicks Check E-mail from Magic Link
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     Then User is in Home View
+
 
 
   Scenario: [first uninstall Verify that user can retype the email address after unsuccessful login
@@ -23,3 +25,9 @@ Feature: Login features
     And User clicks on proceed with Login
     When User clicks on try again
     Then User is able to retype the e-mail address
+
+  Scenario: [first uninstall] Verify that user cannot login with unregistered email
+    Given User enters an unregistered e-mail address
+    And User clicks on proceed with Login
+    Then Wrong email message is displayed to the user
+

@@ -7,9 +7,16 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+
 import java.io.FileNotFoundException;
 
+import static core.json.parsers.ConfigJasonFileReading.runningSetup;
+
 public class LoginSteps {
+    private String unregisteredEmail = runningSetup().getUnregisteredEmail();
+
+    public LoginSteps() throws FileNotFoundException {
+    }
 
     @And("^User selects Log In$")
     public void userSelectsLogIn() {
@@ -36,7 +43,6 @@ public class LoginSteps {
         loginView.clickProceedWithLogin();
     }
 
-
     @When("^User clicks on try again$")
     public void userClicksOnTryAgain() throws FileNotFoundException {
         LoginView loginView = new LoginView();
@@ -48,4 +54,17 @@ public class LoginSteps {
         LoginView loginView = new LoginView();
         loginView.sendTextEmailAddressUsingJson();
     }
+
+    @Given("^User enters an unregistered e-mail address$")
+    public void userEntersAnUnregisteredEMailAddress() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.sendTextEmailAddressUsingString(unregisteredEmail);
+    }
+
+    @Then("^Wrong email message is displayed to the user$")
+    public void wrongEmailMessageIsDisplayedToTheUser() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.validateWrongEmailNotification();
+    }
 }
+

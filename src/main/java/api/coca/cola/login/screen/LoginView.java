@@ -13,6 +13,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
@@ -123,7 +124,6 @@ public class LoginView {
         return (CheckMagicLinkView) screenView;
     }
 
-
     public LoginView sendTextEmailAddressUsingString(String email) {
         try {
             MyLogger.log.info("Trying to send text: " + email + " to e-mail address input");
@@ -131,6 +131,22 @@ public class LoginView {
             return this;
         } catch (WebDriverException e) {
             throw new AssertionError("Cannot send text: " + email + " to e-mail address input");
+        }
+    }
+
+
+    public LoginView validateWrongEmailNotification() {
+        try {
+            MyLogger.log.info("Validate wrong email notification is displayed and elements are displayed");
+            waiters.waitForElementVisibility(wrongEmailLabel);
+            assertsUtils.isElementDisplayed(wrongEmailLabel);
+            assertsUtils.isElementDisplayed(wrongEmailDescription);
+            assertsUtils.isElementDisplayed(tryAgainBtn);
+            assertsUtils.isElementDisplayed(registerBtn);
+            Assert.assertTrue("The email address is already registered", wrongEmailDescription.getAttribute("name").equals("Hey, it looks like we have never seen this email before!"));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot validate wrong email notification is displayed and elements are displayed");
         }
     }
 
