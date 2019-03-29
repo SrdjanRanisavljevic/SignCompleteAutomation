@@ -7,7 +7,6 @@ import core.classic.methods.AssertsUtils;
 import core.classic.methods.Gestures;
 import core.classic.methods.Waiters;
 import core.watchers.MyLogger;
-import cucumber.api.java.en.And;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -46,6 +45,12 @@ public class LauncherView {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\")")
     private MobileElement logo;
 
+    /**
+     * SEND NOTIFICATION POP-UP ELEMENTS
+     */
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeAlert' AND name CONTAINS[c] '“Coca-Cola DEV”'")
+    private MobileElement sendNotificationPopUp;
 
     public LauncherView validateElementsLauncherScreem() {
         try {
@@ -78,6 +83,24 @@ public class LauncherView {
         } catch (WebDriverException | FileNotFoundException e) {
             throw new AssertionError("Cannot click on Login Category button from Launcher screen");
         }
+    }
+
+    public LauncherView clickOnDontAllowNotificationBtn() {
+        try {
+            MyLogger.log.info("Check if Send Notification Pop-Up is displayed");
+            try {
+                if (sendNotificationPopUp.isEnabled()) {
+                    MyLogger.log.info("Send Notification Pop-Up is displayed?: " + sendNotificationPopUp.isDisplayed());
+                    Drivers.getMobileDriver().switchTo().alert().dismiss();
+                    MyLogger.log.info("Send Notification Pop-Up was dismissed");
+                }
+            } catch (WebDriverException e) {
+                MyLogger.log.info("Send Notification Pop-Up is not displayed and we should validate elements from Launcher View");
+            }
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot check if Send Notification Pop-Up is displayed");
+        }
+        return this;
     }
 
 

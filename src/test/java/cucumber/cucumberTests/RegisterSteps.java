@@ -36,7 +36,8 @@ public class RegisterSteps {
     @Given("^User is in Launcher Screen$")
     public void userIsInLauncherScreen() {
         LauncherView launcherView = new LauncherView();
-        launcherView.validateElementsLauncherScreem();
+        launcherView.clickOnDontAllowNotificationBtn()
+                .validateElementsLauncherScreem();
     }
 
     @And("^User selects Create Account$")
