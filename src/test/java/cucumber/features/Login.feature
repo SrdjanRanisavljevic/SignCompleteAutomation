@@ -35,5 +35,5 @@ Feature: Login features
   Scenario: [first uninstall] Verify that user can access Register field from Login after unsuccessful login
     Given User enters an unregistered e-mail address
     And User clicks on proceed with Login
-    When User clicks on Register
+    When User clicks on Register button from from Pop-up message
     Then User is in E-mail Address screen from Create Account

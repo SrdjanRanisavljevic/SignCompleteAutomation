@@ -68,7 +68,7 @@ public class LoginSteps {
         loginView.validateWrongEmailNotification();
     }
 
-    @When("^User clicks on Register$")
+    @When("^User clicks on Register button from from Pop-up message$")
     public void userClicksOnRegister() throws FileNotFoundException {
         LoginView loginView = new LoginView();
         loginView.clickOnRegisterBtn();

@@ -64,7 +64,7 @@ public class GetMagicLinkView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/send_magic_link_button\")")
     private MobileElement magicLinkBtn;
 
-    @iOSXCUITFindBy(accessibility = "The Privacy Policy and Terms and Conditions")
+    @iOSXCUITFindBy(accessibility = "the Terms of Use and have read the Privacy Notice")
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"The Privacy Policy and Terms and Conditions\")")
     private MobileElement termsAndConditionsLabel;
 
@@ -73,7 +73,7 @@ public class GetMagicLinkView extends ScreenView {
      * BOTTOM BAR ELEMENTS
      */
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"PRIVACY POLICY\"]")
+    @iOSXCUITFindBy(accessibility = "PRIVACY NOTICE")
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/send_magic_link_button_privacy_policy\")")
     private MobileElement privacyPolicyBtn;
 
