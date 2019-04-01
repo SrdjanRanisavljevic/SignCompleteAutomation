@@ -191,12 +191,12 @@ public class DriverManagerAndroid extends ConfigJasonFileReading {
             } catch (Throwable t) {
                 MyLogger.log.info("+++++++++++ Could not close ANDROID Service/Server +++++++++++");
             }
-            try {
-                MyLogger.log.info("+++++++++++ Trying to uninstall Inflight application after run is finished +++++++++++");
-                Drivers.adb.uninstallApp(getAndroidJasonResults().getAppPackage());
-            } catch (Throwable t) {
-                MyLogger.log.info("+++++++++++ Could not uninstall Inflight application after run is finished +++++++++++");
-            }
+//            try {
+//                MyLogger.log.info("+++++++++++ Trying to uninstall Inflight application after run is finished +++++++++++");
+//                Drivers.adb.uninstallApp(getAndroidJasonResults().getAppPackage());
+//            } catch (Throwable t) {
+//                MyLogger.log.info("+++++++++++ Could not uninstall Inflight application after run is finished +++++++++++");
+//            }
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {

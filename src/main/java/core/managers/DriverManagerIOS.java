@@ -145,13 +145,13 @@ public class DriverManagerIOS extends ConfigJasonFileReading {
             } catch (Throwable t) {
                 MyLogger.log.info("+++++++++++ Could not close iOS Service/Server +++++++++++");
             }
-            try {
-                MyLogger.log.info("+++++++++++ Trying to uninstall Inflight application after run is finished +++++++++++");
-                String cmd = "ios-deploy --id " + runningSetup().getDeviceID() + " --uninstall_only --bundle_id de.telekom.connectivity.inflight";
-                Runtime.getRuntime().exec(cmd);
-            } catch (Throwable t) {
-                MyLogger.log.info("+++++++++++ Could not uninstall Inflight application after run is finished +++++++++++");
-            }
+//            try {
+//                MyLogger.log.info("+++++++++++ Trying to uninstall Inflight application after run is finished +++++++++++");
+//                String cmd = "ios-deploy --id " + runningSetup().getDeviceID() + " --uninstall_only --bundle_id de.telekom.connectivity.inflight";
+//                Runtime.getRuntime().exec(cmd);
+//            } catch (Throwable t) {
+//                MyLogger.log.info("+++++++++++ Could not uninstall Inflight application after run is finished +++++++++++");
+
             try {
                 MyLogger.log.info("+++++++++++ Trying to uninstall WDA application after run is finished +++++++++++");
                 String cmd = "ios-deploy --id " + runningSetup().getDeviceID() + " --uninstall_only --bundle_id com.facebook.WebDriverAgentRunner";

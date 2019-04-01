@@ -15,6 +15,7 @@ import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class LoginSteps {
     private String unregisteredEmail = runningSetup().getUnregisteredEmail();
+    private String usermail = runningSetup().getUsermail();
 
     public LoginSteps() throws FileNotFoundException {
     }
@@ -78,6 +79,18 @@ public class LoginSteps {
     public void userIsInEMailAddressScreenFromCreateAccount() {
         EmailAddressView emailAddressView = new EmailAddressView();
         emailAddressView.validateElementsEmailAddressView();
+    }
+
+    @Then("^User opens the app and checks the email address is kept$")
+    public void userOpensTheAppAndChecksTheEmailAddressIsKept() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.dataKeptOnBackgroundInteraction(usermail);
+    }
+
+    @Then("^User checks the email address to not be kept$")
+    public void userChecksTheEmailAddressToNotBeKept() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.dataNotKeptOnExitFromLogin(usermail);
     }
 }
 

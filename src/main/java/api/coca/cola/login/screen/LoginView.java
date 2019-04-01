@@ -5,9 +5,7 @@ import api.coca.cola.create.account.screen.EmailAddressView;
 import api.coca.cola.utils.screen.views.ScreenView;
 import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
-import core.classic.methods.AssertsUtils;
-import core.classic.methods.Gestures;
-import core.classic.methods.Waiters;
+import core.classic.methods.*;
 import core.watchers.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -15,11 +13,14 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class LoginView {
@@ -173,7 +174,43 @@ public class LoginView {
         }
     }
 
+    public LoginView dataKeptOnBackgroundInteraction(String element) {
+        try {
+            MyLogger.log.info("Validate that the input for email is kept on background interaction for Login Screen");
+            try {
+                if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+                    waiters.waitForElementVisibility(emailLabel);
+                    Assert.assertTrue("Email address was cleared on background interaction", emailInput.getAttribute("value").equals(element));
+                } else {
+                    waiters.waitForElementVisibility(emailLabel);
+                    Assert.assertTrue("Email address was cleared on background interaction", emailInput.getAttribute("text").equals(element));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return this;
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Cannot validate the input for email is kept on background interaction for Login Screen");
+        }
+    }
 
+    public LoginView dataNotKeptOnExitFromLogin(String element) {
+        try {
+            MyLogger.log.info("Validate that the input for email is not kept after exit and enter again in Login Screen");
+            try {
+                if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+                    Assert.assertFalse(emailInput.getAttribute("value").equals(element));
+                } else {
+                    Assert.assertFalse(emailInput.getAttribute("text").equals(element));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return this;
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Cannot validate the input for email is kept on background interaction for Login Screen");
+        }
+    }
 
 
 }
