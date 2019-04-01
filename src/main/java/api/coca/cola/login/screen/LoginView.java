@@ -1,6 +1,7 @@
 package api.coca.cola.login.screen;
 
 import api.coca.cola.create.account.screen.CheckMagicLinkView;
+import api.coca.cola.create.account.screen.EmailAddressView;
 import api.coca.cola.utils.screen.views.ScreenView;
 import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
@@ -160,5 +161,19 @@ public class LoginView {
             throw new AssertionError("Cannot click on Try Again button");
         }
     }
+
+
+    public EmailAddressView clickOnRegisterBtn() {
+        try {
+            MyLogger.log.info("Trying to click on Register button");
+            gestures.clickOnMobileElement(registerBtn);
+            return new EmailAddressView();
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot click on Register button");
+        }
+    }
+
+
+
 
 }

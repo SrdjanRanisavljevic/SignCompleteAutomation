@@ -1,5 +1,6 @@
 package cucumber.cucumberTests;
 
+import api.coca.cola.create.account.screen.EmailAddressView;
 import api.coca.cola.launcher.screen.LauncherView;
 import api.coca.cola.login.screen.LoginView;
 import cucumber.api.java.en.And;
@@ -65,6 +66,18 @@ public class LoginSteps {
     public void wrongEmailMessageIsDisplayedToTheUser() throws FileNotFoundException {
         LoginView loginView = new LoginView();
         loginView.validateWrongEmailNotification();
+    }
+
+    @When("^User clicks on Register$")
+    public void userClicksOnRegister() throws FileNotFoundException {
+        LoginView loginView = new LoginView();
+        loginView.clickOnRegisterBtn();
+    }
+
+    @Then("^User is in E-mail Address screen from Create Account$")
+    public void userIsInEMailAddressScreenFromCreateAccount() {
+        EmailAddressView emailAddressView = new EmailAddressView();
+        emailAddressView.validateElementsEmailAddressView();
     }
 }
 
