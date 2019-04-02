@@ -65,7 +65,7 @@ public class GetMagicLinkView extends ScreenView {
     private MobileElement magicLinkBtn;
 
     @iOSXCUITFindBy(accessibility = "the Terms of Use and have read the Privacy Notice")
-    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"The Privacy Policy and Terms and Conditions\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"the Terms of Use and have read the Privacy Notice\")")
     private MobileElement termsAndConditionsLabel;
 
 
