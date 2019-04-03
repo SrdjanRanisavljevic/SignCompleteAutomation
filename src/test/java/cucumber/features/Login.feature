@@ -51,3 +51,10 @@ Feature: Login features
     And User is in Launcher Screen
     And User selects Log In
     Then User checks the email address to not be kept
+
+  Scenario: Verify that user cannot login with incorrect email format
+    Given User enters an invalid email and cannot proceed further
+      | tccc.johndoegmail.com |
+      | tccc.johndoe@gmailcom |
+      | tccc.johndoe          |
+      |                       |

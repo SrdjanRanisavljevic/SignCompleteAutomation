@@ -3,14 +3,16 @@ package cucumber.cucumberTests;
 import api.coca.cola.create.account.screen.EmailAddressView;
 import api.coca.cola.launcher.screen.LauncherView;
 import api.coca.cola.login.screen.LoginView;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-
 import java.io.FileNotFoundException;
+import java.util.List;
 
+import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
 public class LoginSteps {
@@ -91,6 +93,23 @@ public class LoginSteps {
     public void userChecksTheEmailAddressToNotBeKept() throws FileNotFoundException {
         LoginView loginView = new LoginView();
         loginView.dataNotKeptOnExitFromLogin(usermail);
+    }
+
+    @Given("^User enters an invalid email and cannot proceed further$")
+        public void userEntersAnInvalidEmailInTheEmailField(DataTable table) throws FileNotFoundException {
+            LoginView loginView = new LoginView();
+            List<String> emails = table.asList(String.class);
+
+            for (int i = 0; i <= emails.size() - 1; i++) {
+                String email = emails.get(i);
+                loginView.sendTextEmailAddressUsingString(email).clickOnLoginButtonForIncorrectEmailFormat();
+                if (getPlatformUnderTest().getPlatformName().equalsIgnoreCase("android")) {
+                    loginView.verifyInvalidEmailAddressError();
+                } else {
+                    loginView.validateElementsLoginScreen();
+                }
+
+            }
     }
 }
 

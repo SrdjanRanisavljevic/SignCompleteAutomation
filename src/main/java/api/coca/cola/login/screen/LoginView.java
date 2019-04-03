@@ -23,7 +23,7 @@ import java.io.IOException;
 import static core.json.parsers.ConfigJasonFileReading.getPlatformUnderTest;
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
 
-public class LoginView {
+public class LoginView extends ScreenView {
 
     public LoginView() throws FileNotFoundException {
         AppiumDriver driver = Drivers.getMobileDriver();
@@ -70,6 +70,9 @@ public class LoginView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/next_lottie_button\")")
     private MobileElement proceedBtn;
 
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/textinput_error\")")
+    private MobileElement textInputError;
 
     /**
      * Wrong Email Elements from Pop-up
@@ -212,5 +215,27 @@ public class LoginView {
         }
     }
 
+    public LoginView clickOnLoginButtonForIncorrectEmailFormat() {
+        MyLogger.log.info("Trying to click on proceed button to display the error message");
+        ScreenView screenView = null;
+        try {
+            screenView = utilView.clickOnProceedButton(new LoginView(), gestures, proceedBtn);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return (LoginView) screenView;
+    }
+
+    public LoginView verifyInvalidEmailAddressError() {
+        try {
+            MyLogger.log.info("Verifying that invalid email error is displayed when filling a wrong email address format");
+            waiters.waitForElementVisibility(textInputError);
+            assertsUtils.isElementDisplayed(textInputError);
+            Assert.assertTrue("The email address format is correct", textInputError.getAttribute("name").equals("Invalid email address"));
+            return this;
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot verify invalid email address error is displayed when filling a wrong email address format");
+        }
+    }
 
 }
