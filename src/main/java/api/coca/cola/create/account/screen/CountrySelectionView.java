@@ -5,6 +5,7 @@ import api.coca.cola.utils.screen.views.UtilView;
 import api.drivers.Drivers;
 import core.classic.methods.AssertsUtils;
 import core.classic.methods.Gestures;
+import core.classic.methods.Swipe;
 import core.classic.methods.Waiters;
 import core.watchers.MyLogger;
 import io.appium.java_client.AppiumDriver;
@@ -18,6 +19,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
@@ -113,29 +115,50 @@ public class CountrySelectionView extends ScreenView {
     }
 
 
-    public CountrySelectionView chooseDesiredCountry(String desiredCountry) throws FileNotFoundException {
+    public CountrySelectionView selectDesiredCountry(String preferredCountry) throws IOException {
 
-        MyLogger.log.info("Trying to select the desired country: " + desiredCountry);
+        MyLogger.log.info("Trying to select the desired country: " + preferredCountry);
+        waiters.waitForElementVisibility(countryLabel);
 
         if (runningSetup().getPlatformName().equals("android")) {
 
-            List<MobileElement> countryListElements = countryList.findElements(By.className("android.widget.TextView"));
-            for (int i = 0; i < countryListElements.size(); i++) {
-                if (countryListElements.get(i).getText().equalsIgnoreCase(desiredCountry)) {
-                    countryListElements.get(i).click();
+            try {
+
+                MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))"));
+
+                if (country.isDisplayed()) {
+                    country.click();
+                } else {
+                    Swipe.swipeUpPress();
+                    waiters.waitForElementVisibility(countryLabel);
+                    gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
+                }
+
+            } catch (WebDriverException e) {
+
+                Swipe.swipeUpPress();
+                MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))"));
+
+                if (country.isDisplayed()) {
+                    country.click();
+                } else {
+                    Swipe.swipeUpPress();
+                    waiters.waitForElementVisibility(countryLabel);
+                    gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
                 }
             }
 
         } else {
 
-            MobileElement countryList = (MobileElement) Drivers.getMobileDriver().findElement(By.xpath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable"));
-            List<MobileElement> countries = countryList.findElements(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText'"));
-            for (MobileElement country : countries) {
-                if (country.getAttribute("name").equalsIgnoreCase(desiredCountry)) {
-                    country.click();
-                    break;
-                }
+            MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'"));
+            if (country.isDisplayed()) {
+                country.click();
+            } else {
+                Swipe.swipeUpPress();
+                waiters.waitForElementVisibility(countryLabel);
+                gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'")));
             }
+
         }
         return this;
     }

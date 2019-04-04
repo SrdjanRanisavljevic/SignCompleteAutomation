@@ -204,10 +204,10 @@ Feature: Register features
   Scenario Outline: [first uninstall] User cannot register if the age is under the age limit
     Given User enters a valid e-mail address
     And User selects a "<country>" in the "country" field
-    And User enters a "<birth date year>" in the "birth date year" field
+    And User enters a "<birth date year>" from "birth date year"
     Then User is notified that he is too young to register
     Examples:
-      | country     | birth date year |
-      | Russia      | 2008            |
-      | Switzerland | 2007            |
-      | Ukraine     | 2006            |
+      | country | birth date year |
+      | Russia  | 2008            |
+      | Austria | 2007            |
+      | Ukraine | 2006            |
