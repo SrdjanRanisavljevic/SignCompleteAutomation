@@ -52,9 +52,34 @@ Feature: Login features
     And User selects Log In
     Then User checks the email address to not be kept
 
+
   Scenario: Verify that user cannot login with incorrect email format
     Given User enters an invalid email and cannot proceed further
       | tccc.johndoegmail.com |
       | tccc.johndoe@gmailcom |
       | tccc.johndoe          |
       |                       |
+
+
+  Scenario Outline: [first uninstall] Verify that user is in Home Screen after a successful Login
+    Given User enters a registered e-mail address
+    And User clicks on proceed with Login
+    And User clicks Check E-mail from Magic Link
+    And User unlocks the app from received e-mail
+    And User skips tutorial
+    And User is in Home View
+    And User "<performs an action>"
+    And User open the app
+    Then User is in "<expected screen>"
+    Examples:
+      | performs an action             | expected screen |
+      | puts the app in the background | Home Screen     |
+      | closes the app                 | Home Screen     |
+
+
+  Scenario: [first uninstall] Verify that an error message is displayed when opening a wrong email with the magic link
+    Given User enters a registered e-mail address
+    And User clicks on proceed with Login
+    And User clicks Check E-mail from Magic Link
+    When User tries to unlock the app from an old received e-mail
+    Then An error message is displayed when unlocking the app from an old received e-mail

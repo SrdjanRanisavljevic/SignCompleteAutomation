@@ -8,6 +8,7 @@ import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.tutorial.screen.TutorialScanView;
 import api.coca.cola.utils.workarounds.WorkaroundsPhone;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import org.json.simple.parser.ParseException;
 
@@ -389,14 +390,14 @@ public class RegisterSteps {
     public void userSelectsAInTheField(String arg0, String arg1) throws Throwable {
         CountrySelectionView countrySelectionView = new CountrySelectionView();
         if (arg1.equals("country")) {
-            countrySelectionView.chooseDesiredCountry(arg0)
+            countrySelectionView.selectDesiredCountry(arg0)
                     .clickOnProceedButton();
         }
     }
 
 
-    @And("^User enters a \"([^\"]*)\" in the \"([^\"]*)\" field$")
-    public void userEntersAInTheField(int arg0, String arg1) throws Throwable {
+    @And("^User enters a \"([^\"]*)\" from \"([^\"]*)\"$")
+    public void userEntersAFrom(int arg0, String arg1) {
         BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
         if (arg1.equals("birth date year")) {
             birthdaySelectionView
@@ -405,11 +406,13 @@ public class RegisterSteps {
         }
     }
 
+
     @And("^User validates that the email was received$")
     public void userValidatesThatTheEmailWasReceived() throws Exception {
         EmailViewManager emailView = new EmailViewManager();
         emailView.validateThatAnEmailWasReceived();
-
     }
+
+
 }
 

@@ -46,6 +46,61 @@ public class Swipe {
         }
     }
 
+    public static void swipeUpPress() throws IOException{
+        Dimension screenDim = Drivers.getMobileDriver().manage().window().getSize();
+        int height = screenDim.height;
+        int width = screenDim.width;
+        if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+            MyLogger.log.info("Swipe up using iOS Driver");
+            int x = width / 2;
+            double startY = height * 0.80;
+            System.out.println(startY);
+            double finalY = height * 0.20;
+            new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x, (int) startY))
+                    .moveTo(PointOption.point(x, (int) -finalY))
+                    .release()
+                    .perform();
+        } else {
+            MyLogger.log.info("Swipe up using android Driver");
+            int x = width / 2;
+            double startY = height * 0.80;
+            System.out.println(startY);
+            double finalY = height * 0.20;
+            System.out.println(finalY);
+            new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x, (int) startY))
+                    .moveTo(PointOption.point(x, (int) finalY))
+                    .release()
+                    .perform();
+        }
+    }
+
+    public static void swipeUpLongPress() throws IOException {
+        Dimension screenDim = Drivers.getMobileDriver().manage().window().getSize();
+        int height = screenDim.height;
+        int width = screenDim.width;
+        if (getPlatformUnderTest().getPlatformName().equals("ios")) {
+            MyLogger.log.info("Swipe up using iOS Driver");
+            int x = width / 2;
+            double startY = height * 0.80;
+            System.out.println(startY);
+            double finalY = height * 0.20;
+            new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x, (int) startY))
+                    .moveTo(PointOption.point(x, (int) -finalY))
+                    .release()
+                    .perform();
+        } else {
+            MyLogger.log.info("Swipe up using android Driver");
+            int x = width / 2;
+            double startY = height * 0.80;
+            System.out.println(startY);
+            double finalY = height * 0.20;
+            System.out.println(finalY);
+            new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x, (int) startY))
+                    .moveTo(PointOption.point(x, (int) finalY))
+                    .release()
+                    .perform();
+        }
+    }
 
     public static void swipeUpGeneral() throws IOException, ParseException {
         if (getPlatformUnderTest().getPlatformName().equals("ios")) {
