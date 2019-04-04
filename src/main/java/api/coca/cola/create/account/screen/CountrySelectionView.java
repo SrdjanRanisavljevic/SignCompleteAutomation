@@ -68,7 +68,7 @@ public class CountrySelectionView extends ScreenView {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/next_lottie_button\")")
     private MobileElement proceedBtn;
 
-//    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable")
+    //    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable")
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\")")
     private MobileElement countryList;
 
@@ -124,45 +124,39 @@ public class CountrySelectionView extends ScreenView {
 
             try {
 
-                MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))"));
-
-                if (country.isDisplayed()) {
-                    country.click();
-                } else {
-                    Swipe.swipeUpPress();
-                    waiters.waitForElementVisibility(countryLabel);
-                    gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
-                }
+                MobileElement countryAOS = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))"));
+                isCountryDisplayed(countryAOS, countryLabel);
+                gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
 
             } catch (WebDriverException e) {
 
                 Swipe.swipeUpPress();
-                MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))"));
-
-                if (country.isDisplayed()) {
-                    country.click();
-                } else {
-                    Swipe.swipeUpPress();
-                    waiters.waitForElementVisibility(countryLabel);
-                    gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
-                }
+                waiters.waitForElementVisibility(countryLabel);
+                gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/country_list\").childSelector(new UiSelector().text(\"" + preferredCountry + "\"))")));
             }
+
 
         } else {
 
-            MobileElement country = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'"));
-            if (country.isDisplayed()) {
-                country.click();
-            } else {
-                Swipe.swipeUpPress();
-                waiters.waitForElementVisibility(countryLabel);
-                gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'")));
-            }
+            MobileElement countryIOS = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'"));
+            isCountryDisplayed(countryIOS, countryLabel);
+            gestures.clickOnMobileElement((MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeStaticText' AND name CONTAINS[c] '" + preferredCountry + "'")));
 
         }
+
         return this;
     }
 
+
+    public void isCountryDisplayed(MobileElement element1, MobileElement element2) throws IOException {
+
+        if (element1.isDisplayed()) {
+            element1.click();
+        } else {
+            Swipe.swipeUpPress();
+            waiters.waitForElementVisibility(element2);
+        }
+    }
 
 
 }
