@@ -65,6 +65,7 @@ Feature: Login features
     Given User enters a registered e-mail address
     And User clicks on proceed with Login
     And User clicks Check E-mail from Magic Link
+    And User validates that the email was received
     And User unlocks the app from received e-mail
     And User skips tutorial
     And User is in Home View
@@ -90,6 +91,30 @@ Feature: Login features
     And User clicks on proceed with Login
     And User clicks on Send Link Again
     And User receives a new magic link notification
+    And User validates that the email was received
     And User unlocks the app from received e-mail
+    And User skips tutorial
+    Then User is in Home View
+
+  Scenario: [first uninstall] Verify that a user can login with valid credentials after trying to login with unregistered email address
+    Given User enters an unregistered e-mail address
+    And User clicks on proceed with Login
+    And Wrong email message is displayed to the user
+    When User clicks on try again
+    And User enters a registered e-mail address
+    And User clicks on proceed with Login
+    And User clicks Check E-mail from Magic Link
+    And User validates that the email was received
+    And User unlocks the app from received e-mail
+    And User skips tutorial
+    Then User is in Home View
+
+
+  Scenario: [first uninstall] Verify that user can login using verification code
+    Given User enters a registered e-mail address
+    And User clicks on proceed with Login
+    When User clicks on Enter Code
+    And User validates that the email was received
+    And User enters the verification code
     And User skips tutorial
     Then User is in Home View
