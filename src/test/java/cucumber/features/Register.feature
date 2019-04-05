@@ -207,7 +207,7 @@ Feature: Register features
     And User enters a "<birth date year>" from "birth date year"
     Then User is notified that he is too young to register
     Examples:
-      | country | birth date year |
-      | Russia  | 2008            |
-      | Austria | 2007            |
-      | Ukraine | 2006            |
+      | country      | birth date year |
+      | Russia       | 2008            |
+      | Switezerland | 2007            |
+      | Ukraine      | 2006            |

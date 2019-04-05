@@ -83,3 +83,13 @@ Feature: Login features
     And User clicks Check E-mail from Magic Link
     When User tries to unlock the app from an old received e-mail
     Then An error message is displayed when unlocking the app from an old received e-mail
+
+
+  Scenario: [first uninstall] Verify that user can request a new magic link
+    Given User enters a registered e-mail address
+    And User clicks on proceed with Login
+    And User clicks on Send Link Again
+    And User receives a new magic link notification
+    And User unlocks the app from received e-mail
+    And User skips tutorial
+    Then User is in Home View
