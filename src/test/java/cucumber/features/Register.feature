@@ -200,25 +200,93 @@ Feature: Register features
     When User tries to unlock the app from an old received e-mail
     Then An error message is displayed when unlocking the app from an old received e-mail
 
+# SRDJAN ADDED SCENARIOS
 
   Scenario Outline: [first uninstall] User cannot register if the age is under the age limit
     Given User enters a valid e-mail address
     And User selects a "<country>" in the "country" field
-    And User enters a "<birth date year>" from "birth date year"
+    And User selects that he is "<1 year below the lower age limit>" years old - user is in the "1 year below the lower age limit"
     Then User is notified that he is too young to register
     Examples:
-      | country        | birth date year |
-      | Austria        | 2006            |
-      | Belarus        | 2008            |
-      | Cyprus         | 2007            |
-      | Czech Republic | 2007            |
-      | Estonia        | 2008            |
-      | Greece         | 2007            |
-      | Latvia         | 2008            |
-      | Lithuania      | 2008            |
-      | Malta          | 2007            |
-      | Moldova        | 2006            |
-      | Russia         | 2008            |
-      | Serbia         | 2007            |
-      | Switzerland    | 2007            |
-      | Ukraine        | 2006            |
+      | country          | 1 year below the lower age limit  |
+      | Austria          | 13               |
+      | Belarus          | 11               |
+      | Cyprus           | 12               |
+      | Czech Republic   | 12               |
+      | Estonia          | 11               |
+      | Greece           | 12               |
+      | Latvia           | 11               |
+      | Lithuania        | 11               |
+      | Malta            | 12               |
+      | Moldova          | 13               |
+      | Russia           | 11               |
+      | Serbia           | 12               |
+      | Switzerland      | 12               |
+      | Ukraine          | 13               |
+
+  Scenario Outline: [first uninstall] User is forwarded to Set Up Screen after entering minimum age needed for registration
+    Given User enters a valid e-mail address
+    And User selects a "<country>" in the "country" field
+    And User selects that he is "<lower age limit>" years old - user is in the "lower age limit"
+    Then User is in Set Up Profile view
+    Examples:
+      | country          | lower age limit  |
+      | Austria          | 14               |
+      | Belarus          | 12               |
+      | Cyprus           | 13               |
+      | Czech Republic   | 13               |
+      | Estonia          | 12               |
+      | Greece           | 13               |
+      | Latvia           | 12               |
+      | Lithuania        | 12               |
+      | Malta            | 13               |
+      | Moldova          | 14               |
+      | Russia           | 12               |
+      | Serbia           | 13               |
+      | Switzerland      | 13               |
+      | Ukraine          | 14               |
+
+
+  Scenario Outline: [first uninstall] User is a year below the age needed for privacy consents and is forwarded to Set Up Profile Screen
+    Given User enters a valid e-mail address
+    And User selects a "<country>" in the "country" field
+    And User selects that he is "<1 year below the age needed for privacy consents>" years old - user is in the "1 year below the age needed for privacy consents"
+    Then User is in Set Up Profile view
+    Examples:
+      | country          | 1 year below the age needed for privacy consents  |
+      | Austria          | 15               |
+      | Belarus          | 17               |
+      | Cyprus           | 17               |
+      | Czech Republic   | 17               |
+      | Estonia          | 17               |
+      | Greece           | 17               |
+      | Latvia           | 17               |
+      | Lithuania        | 17               |
+      | Malta            | 16               |
+      | Moldova          | 17               |
+      | Russia           | 17               |
+      | Serbia           | 17               |
+      | Switzerland      | 15               |
+      | Ukraine          | 17               |
+
+  Scenario Outline: [first uninstall] User enters minimum age needed for privacy consents
+    Given User enters a valid e-mail address
+    And User selects a "<country>" in the "country" field
+    And User selects that he is "<minimum age for privacy consents>" years old - user is in the "minimum age for privacy consents"
+    Then User is in Consents View
+    Examples:
+      | country          | minimum age for privacy consents  |
+      | Austria          | 16               |
+      | Belarus          | 18               |
+      | Cyprus           | 18               |
+      | Czech Republic   | 18               |
+      | Estonia          | 18               |
+      | Greece           | 18               |
+      | Latvia           | 18               |
+      | Lithuania        | 18               |
+      | Malta            | 17               |
+      | Moldova          | 18               |
+      | Russia           | 18               |
+      | Serbia           | 18               |
+      | Switzerland      | 16               |
+      | Ukraine          | 18               |

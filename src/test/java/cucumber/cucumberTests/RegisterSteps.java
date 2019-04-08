@@ -413,6 +413,26 @@ public class RegisterSteps {
         emailView.validateThatAnEmailWasReceived();
     }
 
+    // SRDJAN ADDED STEP DEFINITIONS
+
+    @And("^User selects that he is \"([^\"]*)\" years old - user is in the \"([^\"]*)\"$")
+    public void userEntersAFrom(String arg0, String arg1) {
+        int parsedYear = Integer.parseInt(arg0);
+
+        BirthdaySelectionView birthdaySelectionView = new BirthdaySelectionView();
+        birthdaySelectionView
+                .selectDay()
+                .selectMonth()
+                .selectYearSecondMethod(parsedYear)
+                .clickOnProceedBtn();
+
+    }
+    @And("^User clicks back from Set Up Profile view$")
+    public void userClicksBackFromSetUpProfileView() {
+        SetUpProfileView setUpProfileView = new SetUpProfileView();
+        setUpProfileView.clickOnNavigateBackBtn();
+    }
+
 
 }
 

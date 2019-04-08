@@ -20,6 +20,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import static core.json.parsers.ConfigJasonFileReading.runningSetup;
@@ -30,7 +33,7 @@ public class BirthdaySelectionView extends ScreenView {
         AppiumDriver driver = Drivers.getMobileDriver();
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-
+    private final Date date = new Date();
     private final Waiters waiters = new Waiters();
     private final AssertsUtils assertsUtils = new AssertsUtils();
     private final Gestures gestures = new Gestures();
@@ -97,6 +100,17 @@ public class BirthdaySelectionView extends ScreenView {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"2000\")")
     private MobileElement yearInputForTooYoungUser2;
+
+
+    // SRDJAN ADDED SELECTORS
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypePickerWheel' AND name CONTAINS[c] '1.'")
+    @AndroidFindBy(xpath = "//android.widget.NumberPicker[1]")
+    private MobileElement dayInputSrdjan;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypePickerWheel' AND name CONTAINS[c] '2000'")
+    @AndroidFindBy(xpath = "//android.widget.NumberPicker[3]")
+    private MobileElement yearInputSrdjan;
+
 
 
     public BirthdaySelectionView validateElementsfromBirthdayScreen() {
@@ -197,6 +211,112 @@ public class BirthdaySelectionView extends ScreenView {
     }
 
 
+    // SRDJAN ADDED SELECT YEAR METHOD
 
+    public int userYearOfBirth (int yearsOld) {
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int yearInt = localDate.getYear();
+        return yearInt - yearsOld;
+    }
+
+    public BirthdaySelectionView selectYearSecondMethod (int yearsOld) {
+        int userYearOfBirth = userYearOfBirth(yearsOld);
+
+        try {
+            waiters.waitForElementVisibility(yearInputSrdjan);
+            MyLogger.log.info("Trying year of birth");
+            if (runningSetup().getPlatformName().equals("ios")) {
+
+                if (userYearOfBirth(yearsOld) < 2000) {
+
+                    for (int i = 0; i < 2000 - userYearOfBirth; i++) {                                   // +++++++++++++++++++++++++++++++++ THAT " i " value should be edited ++++++++++++++++++ //
+                        MobileElement year = (MobileElement) Drivers.getMobileDriver().findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypePickerWheel' AND value MATCHES[c] '" + i + "'"));
+                        MobileGestures.selectPickerWheelValue(year, "previous");
+                    }
+                }
+
+            } else {
+                if (userYearOfBirth(yearsOld) < 2000) {
+                    for (int i = 0; i< 2000 - userYearOfBirth; i++) {
+                        List<MobileElement> columns = yearInputSrdjan.findElements(By.className("android.widget.Button"));
+                        MobileElement year = columns.get(0);
+                        year.click();
+                    }
+                }
+                else {
+                    for (int i = 0; i<userYearOfBirth-2000; i++) {
+                        List<MobileElement> columns = yearInputSrdjan.findElements(By.className("android.widget.Button"));
+                        MobileElement year = columns.get(1);
+                        year.click();
+                    }
+                }
+            }
+
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot select year of birth");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    // SRDJAN ADDED SELECT DAY METHOD
+
+    public BirthdaySelectionView selectDay() {
+
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int dayNumber = localDate.getDayOfMonth();
+
+
+        try {
+            MyLogger.log.info("Trying to select current day");
+            waiters.waitForElementVisibility(dayInputSrdjan);
+            if (runningSetup().getPlatformName().equalsIgnoreCase("ios")) {
+                for(int i = 1; i<dayNumber; i++ ) {
+                    MobileGestures.selectPickerWheelValue(dayInputSrdjan, "next");
+                }
+            } else {
+                List<MobileElement> columns = dayInputSrdjan.findElements(By.className("android.widget.Button"));
+                MobileElement day = columns.get(1);
+                for (int i=1; i<dayNumber; i++) {
+                    day.click();
+                }
+            }
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot select current day");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    // SRDJAN ADDED SELECT MONTH METHOD
+
+    public BirthdaySelectionView selectMonth() {
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int monthNumber = localDate.getMonthValue();
+
+        try {
+            MyLogger.log.info("Trying to select current month");
+            waiters.waitForElementVisibility(januaryMonth);
+            if (runningSetup().getPlatformName().equalsIgnoreCase("ios")) {
+                for(int i = 1; i<monthNumber; i++ ) {
+                    MobileGestures.selectPickerWheelValue(januaryMonth, "next");
+                }
+            } else {
+
+                List<MobileElement> columns = selectMonth.findElements(By.className("android.widget.Button"));
+                MobileElement month = columns.get(1);
+                for (int i=1; i<monthNumber; i++) {
+                    month.click();
+                }
+            }
+        } catch (WebDriverException e) {
+            throw new AssertionError("Cannot select current month");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
 
 }
