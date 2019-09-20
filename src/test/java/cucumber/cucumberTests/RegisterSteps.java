@@ -2,13 +2,12 @@ package cucumber.cucumberTests;
 
 import api.coca.cola.create.account.screen.*;
 import api.coca.cola.email.screen.EmailViewManager;
-import api.coca.cola.home.screen.HomeView;
+import api.coca.cola.home.screen.HomeViewSign;
 import api.coca.cola.launcher.screen.LauncherView;
 import api.coca.cola.profile.screen.settings.screen.CocaColaWebView;
 import api.coca.cola.tutorial.screen.TutorialScanView;
 import api.coca.cola.utils.workarounds.WorkaroundsPhone;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import org.json.simple.parser.ParseException;
 
@@ -122,7 +121,7 @@ public class RegisterSteps {
 
     @Then("^User is in \"([^\"]*)\"$")
     public void userIsIn(String arg0) {
-        HomeView homeScreenView = new HomeView();
+        HomeViewSign homeScreenView = new HomeViewSign();
         if (arg0.equalsIgnoreCase("Home Screen")) {
             homeScreenView.validateElementsFromHomeView();
         }

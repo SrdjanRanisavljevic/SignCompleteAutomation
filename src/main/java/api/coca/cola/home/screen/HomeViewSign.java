@@ -13,9 +13,9 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomeView {
+public class HomeViewSign {
 
-    public HomeView() {
+    public HomeViewSign() {
         AppiumDriver driver = Drivers.getMobileDriver();
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -83,7 +83,7 @@ public class HomeView {
     private MobileElement prizesLabel;
 
 
-    public HomeView validateElementsFromHomeView() {
+    public HomeViewSign validateElementsFromHomeView() {
         try {
             MyLogger.log.info("Validating elements from Home View");
             waiters.waitForElementVisibility(homeBtn);

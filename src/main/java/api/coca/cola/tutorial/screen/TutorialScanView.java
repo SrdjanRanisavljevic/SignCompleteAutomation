@@ -1,6 +1,6 @@
 package api.coca.cola.tutorial.screen;
 
-import api.coca.cola.home.screen.HomeView;
+import api.coca.cola.home.screen.HomeViewSign;
 import api.drivers.Drivers;
 import core.classic.methods.AssertsUtils;
 import core.classic.methods.Gestures;
@@ -64,7 +64,7 @@ public class TutorialScanView {
     }
 
 
-    public HomeView clickOnSkipTutorialButton() {
+    public HomeViewSign clickOnSkipTutorialButton() {
         try {
             MyLogger.log.info("Trying to click on skip button to go to Home View");
 //            if (tutorialScanLabel.isDisplayed()) {
@@ -74,7 +74,7 @@ public class TutorialScanView {
         } catch (WebDriverException i) {
 //            do nothing
         }
-        return new HomeView();
+        return new HomeViewSign();
     }
 
 

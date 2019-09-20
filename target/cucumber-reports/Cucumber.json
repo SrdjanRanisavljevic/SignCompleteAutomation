@@ -3,43 +3,29 @@
     "line": 1,
     "elements": [
       {
-        "line": 3,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
+        "comments": [
           {
-            "result": {
-              "duration": 2665418022,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "User is in Launcher Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInLauncherScreen()"
-            },
-            "keyword": "Given "
+            "line": 3,
+            "value": "#Background:"
           },
           {
-            "result": {
-              "duration": 1794558875,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "User selects Create Account",
-            "match": {
-              "location": "RegisterSteps.userSelectsCreateAccount()"
-            },
-            "keyword": "And "
+            "line": 4,
+            "value": "#Given User is in Launcher Screen"
           }
-        ]
-      },
-      {
+        ],
         "before": [
           {
             "result": {
-              "duration": 5682875437,
+              "duration": 74022800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.scenarioStartDate()"
+            }
+          },
+          {
+            "result": {
+              "duration": 112800,
               "status": "passed"
             },
             "match": {
@@ -48,16 +34,16 @@
           },
           {
             "result": {
-              "duration": 15681103072,
+              "duration": 33691086400,
               "status": "passed"
             },
             "match": {
-              "location": "Hooks.starting(Scenario)"
+              "location": "Hooks.startScenario(Scenario)"
             }
           },
           {
             "result": {
-              "duration": 153180724,
+              "duration": 1043960200,
               "status": "passed"
             },
             "match": {
@@ -66,7 +52,7 @@
           },
           {
             "result": {
-              "duration": 38318,
+              "duration": 46900,
               "status": "passed"
             },
             "match": {
@@ -75,13 +61,13 @@
           }
         ],
         "line": 7,
-        "name": "[first uninstall] Register a new user using magic link",
+        "name": "Sign Login Feature",
         "description": "",
-        "id": "register-features;[first-uninstall]-register-a-new-user-using-magic-link",
+        "id": "signlogin;sign-login-feature",
         "after": [
           {
             "result": {
-              "duration": 5013849655,
+              "duration": 2184970600,
               "status": "passed"
             },
             "match": {
@@ -90,7 +76,7 @@
           },
           {
             "result": {
-              "duration": 68408,
+              "duration": 23400,
               "status": "passed"
             },
             "match": {
@@ -103,1015 +89,83 @@
         "steps": [
           {
             "result": {
-              "duration": 4921020662,
+              "duration": 10540698800,
               "status": "passed"
             },
             "line": 8,
-            "name": "User enters a valid e-mail address",
+            "name": "User is in Sign launcher screen",
             "match": {
-              "location": "RegisterSteps.userEntersAValidEMailAddress()"
+              "location": "SignLauncher.swipe3TimesToGetTheLoginButton()"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 3157779618,
+              "duration": 2995066400,
               "status": "passed"
             },
             "line": 9,
-            "name": "User selects a country from the list",
+            "name": "User clicks on Sign login button",
             "match": {
-              "location": "RegisterSteps.userSelectACountryFromTheList()"
+              "location": "SignLauncher.clickOnLoginButton()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 6126500557,
+              "duration": 3337044600,
               "status": "passed"
             },
             "line": 10,
-            "name": "User enters birth date",
+            "name": "User enters Sign userName",
             "match": {
-              "location": "RegisterSteps.userEntersBirthDate()"
+              "location": "SignLauncher.enterUserName()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 11718889604,
+              "duration": 3915625500,
               "status": "passed"
             },
             "line": 11,
-            "name": "User proceeds with Consents",
+            "name": "User enters Sign Password",
             "match": {
-              "location": "RegisterSteps.userProceedsWithConsents()"
+              "location": "SignLauncher.enterPassword()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 4201405231,
+              "duration": 3700127500,
               "status": "passed"
             },
             "line": 12,
-            "name": "User enters a display name",
+            "name": "User clicks on Sign Sign in button",
             "match": {
-              "location": "RegisterSteps.userEntersADisplayName()"
+              "location": "SignLauncher.clickOnSignInButton()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 1710614479,
+              "duration": 10072460200,
               "status": "passed"
             },
             "line": 13,
-            "name": "User clicks on E-mail Me Magic Link",
+            "name": "Random Waiter for Vesa to see what is happening",
             "match": {
-              "location": "RegisterSteps.userClicksOnEMailMeMagicLink()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 3957450361,
-              "status": "passed"
-            },
-            "line": 14,
-            "name": "User clicks Check E-mail from Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksCheckEMailFromMagicLink()"
+              "location": "SignLauncher.randomSleep()"
             },
             "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 29709972080,
-              "status": "passed"
-            },
-            "line": 15,
-            "name": "User unlocks the app from received e-mail",
-            "match": {
-              "location": "PrivateEmailSteps.userUnlocksTheAppFromReceivedEMail()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 16221755014,
-              "status": "passed"
-            },
-            "line": 16,
-            "name": "User skips tutorial",
-            "match": {
-              "location": "RegisterSteps.userSkipsTutorial()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 7346412108,
-              "status": "passed"
-            },
-            "line": 17,
-            "name": "User is in Home View",
-            "match": {
-              "location": "HomeScreenSteps.userValidatesThatHeIsInTheHomeView()"
-            },
-            "keyword": "Then "
-          }
-        ]
-      },
-      {
-        "line": 3,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 2842863367,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "User is in Launcher Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInLauncherScreen()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 1811295052,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "User selects Create Account",
-            "match": {
-              "location": "RegisterSteps.userSelectsCreateAccount()"
-            },
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "before": [
-          {
-            "result": {
-              "duration": 5809907679,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.uninstallTheApp(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 14272677411,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.starting(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 148962643,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.seeIfWifiIsEnabled()"
-            }
-          },
-          {
-            "result": {
-              "duration": 36821,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.startIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "line": 35,
-        "name": "[first uninstall] User is in Home Screen after a successful Register even when interacting with the app",
-        "description": "",
-        "id": "register-features;[first-uninstall]-user-is-in-home-screen-after-a-successful-register-even-when-interacting-with-the-app;;2",
-        "after": [
-          {
-            "result": {
-              "duration": 5111509343,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.finished(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 79857,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.stopIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario Outline",
-        "steps": [
-          {
-            "result": {
-              "duration": 4529569630,
-              "status": "passed"
-            },
-            "line": 20,
-            "name": "User enters a valid e-mail address",
-            "match": {
-              "location": "RegisterSteps.userEntersAValidEMailAddress()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 2931811982,
-              "status": "passed"
-            },
-            "line": 21,
-            "name": "User selects a country from the list",
-            "match": {
-              "location": "RegisterSteps.userSelectACountryFromTheList()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6052061840,
-              "status": "passed"
-            },
-            "line": 22,
-            "name": "User enters birth date",
-            "match": {
-              "location": "RegisterSteps.userEntersBirthDate()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 11991943563,
-              "status": "passed"
-            },
-            "line": 23,
-            "name": "User proceeds with Consents",
-            "match": {
-              "location": "RegisterSteps.userProceedsWithConsents()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 4296527428,
-              "status": "passed"
-            },
-            "line": 24,
-            "name": "User enters a display name",
-            "match": {
-              "location": "RegisterSteps.userEntersADisplayName()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 1710301557,
-              "status": "passed"
-            },
-            "line": 25,
-            "name": "User clicks on E-mail Me Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksOnEMailMeMagicLink()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 4187423592,
-              "status": "passed"
-            },
-            "line": 26,
-            "name": "User clicks Check E-mail from Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksCheckEMailFromMagicLink()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 34061865908,
-              "status": "passed"
-            },
-            "line": 27,
-            "name": "User unlocks the app from received e-mail",
-            "match": {
-              "location": "PrivateEmailSteps.userUnlocksTheAppFromReceivedEMail()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6311284788,
-              "status": "passed"
-            },
-            "line": 28,
-            "name": "User skips tutorial",
-            "match": {
-              "location": "RegisterSteps.userSkipsTutorial()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 7143898729,
-              "status": "passed"
-            },
-            "line": 29,
-            "name": "User is in Home View",
-            "match": {
-              "location": "HomeScreenSteps.userValidatesThatHeIsInTheHomeView()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6584959239,
-              "status": "passed"
-            },
-            "line": 30,
-            "name": "User \"puts the app in the background\"",
-            "match": {
-              "arguments": [
-                {
-                  "val": "puts the app in the background",
-                  "offset": 6
-                }
-              ],
-              "location": "RegisterSteps.user(String)"
-            },
-            "matchedColumns": [
-              0
-            ],
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 554600080,
-              "status": "passed"
-            },
-            "line": 31,
-            "name": "User open the app",
-            "match": {
-              "location": "RegisterSteps.userOpenTheApp()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6248582999,
-              "status": "passed"
-            },
-            "line": 32,
-            "name": "User is in \"Home Screen\"",
-            "match": {
-              "arguments": [
-                {
-                  "val": "Home Screen",
-                  "offset": 12
-                }
-              ],
-              "location": "RegisterSteps.userIsIn(String)"
-            },
-            "matchedColumns": [
-              1
-            ],
-            "keyword": "Then "
-          }
-        ]
-      },
-      {
-        "line": 3,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 3119199244,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "User is in Launcher Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInLauncherScreen()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 1875745905,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "User selects Create Account",
-            "match": {
-              "location": "RegisterSteps.userSelectsCreateAccount()"
-            },
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "before": [
-          {
-            "result": {
-              "duration": 5448841424,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.uninstallTheApp(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 14446569937,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.starting(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 142350562,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.seeIfWifiIsEnabled()"
-            }
-          },
-          {
-            "result": {
-              "duration": 44148,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.startIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "line": 36,
-        "name": "[first uninstall] User is in Home Screen after a successful Register even when interacting with the app",
-        "description": "",
-        "id": "register-features;[first-uninstall]-user-is-in-home-screen-after-a-successful-register-even-when-interacting-with-the-app;;3",
-        "after": [
-          {
-            "result": {
-              "duration": 5163197797,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.finished(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 34663,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.stopIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario Outline",
-        "steps": [
-          {
-            "result": {
-              "duration": 4953717341,
-              "status": "passed"
-            },
-            "line": 20,
-            "name": "User enters a valid e-mail address",
-            "match": {
-              "location": "RegisterSteps.userEntersAValidEMailAddress()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 3581533775,
-              "status": "passed"
-            },
-            "line": 21,
-            "name": "User selects a country from the list",
-            "match": {
-              "location": "RegisterSteps.userSelectACountryFromTheList()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6449906590,
-              "status": "passed"
-            },
-            "line": 22,
-            "name": "User enters birth date",
-            "match": {
-              "location": "RegisterSteps.userEntersBirthDate()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 12107850633,
-              "status": "passed"
-            },
-            "line": 23,
-            "name": "User proceeds with Consents",
-            "match": {
-              "location": "RegisterSteps.userProceedsWithConsents()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 4732735239,
-              "status": "passed"
-            },
-            "line": 24,
-            "name": "User enters a display name",
-            "match": {
-              "location": "RegisterSteps.userEntersADisplayName()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 1715598274,
-              "status": "passed"
-            },
-            "line": 25,
-            "name": "User clicks on E-mail Me Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksOnEMailMeMagicLink()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 3808052344,
-              "status": "passed"
-            },
-            "line": 26,
-            "name": "User clicks Check E-mail from Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksCheckEMailFromMagicLink()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 35485557418,
-              "status": "passed"
-            },
-            "line": 27,
-            "name": "User unlocks the app from received e-mail",
-            "match": {
-              "location": "PrivateEmailSteps.userUnlocksTheAppFromReceivedEMail()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 6420737949,
-              "status": "passed"
-            },
-            "line": 28,
-            "name": "User skips tutorial",
-            "match": {
-              "location": "RegisterSteps.userSkipsTutorial()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 7156486255,
-              "status": "passed"
-            },
-            "line": 29,
-            "name": "User is in Home View",
-            "match": {
-              "location": "HomeScreenSteps.userValidatesThatHeIsInTheHomeView()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 303125460,
-              "status": "passed"
-            },
-            "line": 30,
-            "name": "User \"closes the app\"",
-            "match": {
-              "arguments": [
-                {
-                  "val": "closes the app",
-                  "offset": 6
-                }
-              ],
-              "location": "RegisterSteps.user(String)"
-            },
-            "matchedColumns": [
-              0
-            ],
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 581817325,
-              "status": "passed"
-            },
-            "line": 31,
-            "name": "User open the app",
-            "match": {
-              "location": "RegisterSteps.userOpenTheApp()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 7582880656,
-              "status": "passed"
-            },
-            "line": 32,
-            "name": "User is in \"Home Screen\"",
-            "match": {
-              "arguments": [
-                {
-                  "val": "Home Screen",
-                  "offset": 12
-                }
-              ],
-              "location": "RegisterSteps.userIsIn(String)"
-            },
-            "matchedColumns": [
-              1
-            ],
-            "keyword": "Then "
-          }
-        ]
-      },
-      {
-        "line": 3,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 2908730067,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "User is in Launcher Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInLauncherScreen()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 1923563446,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "User selects Create Account",
-            "match": {
-              "location": "RegisterSteps.userSelectsCreateAccount()"
-            },
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "before": [
-          {
-            "result": {
-              "duration": 4703050627,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.uninstallTheApp(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 14563728553,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.starting(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 132408277,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.seeIfWifiIsEnabled()"
-            }
-          },
-          {
-            "result": {
-              "duration": 37306,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.startIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "line": 38,
-        "name": "[first uninstall] Register a too young user",
-        "description": "",
-        "id": "register-features;[first-uninstall]-register-a-too-young-user",
-        "after": [
-          {
-            "result": {
-              "duration": 5165389169,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.finished(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 44709,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.stopIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 4628185629,
-              "status": "passed"
-            },
-            "line": 39,
-            "name": "User enters a valid e-mail address",
-            "match": {
-              "location": "RegisterSteps.userEntersAValidEMailAddress()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 2972678373,
-              "status": "passed"
-            },
-            "line": 40,
-            "name": "User selects a country from the list",
-            "match": {
-              "location": "RegisterSteps.userSelectACountryFromTheList()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 12004461161,
-              "status": "passed"
-            },
-            "line": 41,
-            "name": "User enters a birth date from a recent date",
-            "match": {
-              "location": "RegisterSteps.userEntersABirthDateFromARecentDate()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 2231051989,
-              "status": "passed"
-            },
-            "line": 42,
-            "name": "User is notified that he is too young to register",
-            "match": {
-              "location": "RegisterSteps.userIsNotifiedThatHeIsTooYoungToRegister()"
-            },
-            "keyword": "Then "
-          }
-        ]
-      },
-      {
-        "line": 3,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 2437661124,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "User is in Launcher Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInLauncherScreen()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 1893099975,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "User selects Create Account",
-            "match": {
-              "location": "RegisterSteps.userSelectsCreateAccount()"
-            },
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "before": [
-          {
-            "result": {
-              "duration": 4347315528,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.uninstallTheApp(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 15028997119,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.starting(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 147928031,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.seeIfWifiIsEnabled()"
-            }
-          },
-          {
-            "result": {
-              "duration": 41443,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.startIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "line": 45,
-        "name": "[first uninstall] Trying to register an already registered user and continue with Login flow",
-        "description": "",
-        "id": "register-features;[first-uninstall]-trying-to-register-an-already-registered-user-and-continue-with-login-flow",
-        "after": [
-          {
-            "result": {
-              "duration": 5147484192,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.finished(Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 47204,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.stopIowWebKit(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 3905174432,
-              "status": "passed"
-            },
-            "line": 46,
-            "name": "User enters an already registered e-mail address",
-            "match": {
-              "location": "RegisterSteps.userEntersAnAlreadyRegisteredEMailAddress()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 4244667547,
-              "status": "passed"
-            },
-            "line": 47,
-            "name": "User is in Check E-mail Screen",
-            "match": {
-              "location": "RegisterSteps.userIsInCheckEMailScreen()"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 580799756,
-              "status": "passed"
-            },
-            "line": 48,
-            "name": "User is recognized as to be already registered",
-            "match": {
-              "location": "RegisterSteps.userIsRecognizedAsToBeAlreadyRegistered()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 3640815666,
-              "status": "passed"
-            },
-            "line": 49,
-            "name": "User clicks Check E-mail from Magic Link",
-            "match": {
-              "location": "RegisterSteps.userClicksCheckEMailFromMagicLink()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 34811622319,
-              "status": "passed"
-            },
-            "line": 50,
-            "name": "User unlocks the app from received e-mail",
-            "match": {
-              "location": "PrivateEmailSteps.userUnlocksTheAppFromReceivedEMail()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 5518559852,
-              "status": "passed"
-            },
-            "line": 51,
-            "name": "User skips tutorial",
-            "match": {
-              "location": "RegisterSteps.userSkipsTutorial()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 7366727666,
-              "status": "passed"
-            },
-            "line": 52,
-            "name": "User is in Home View",
-            "match": {
-              "location": "HomeScreenSteps.userValidatesThatHeIsInTheHomeView()"
-            },
-            "keyword": "Then "
           }
         ]
       }
     ],
-    "name": "Register features",
+    "name": "SignLogin",
     "description": "",
-    "id": "register-features",
+    "id": "signlogin",
     "keyword": "Feature",
-    "uri": "src/test/java/cucumber/features/Register.feature"
+    "uri": "src/test/java/cucumber/features/SignLogin.feature"
   }
 ]

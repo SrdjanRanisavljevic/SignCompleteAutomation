@@ -33,7 +33,7 @@ public class LauncherView {
      * LAUNCHER VIEW ELEMENTS
      */
 
-    @iOSXCUITFindBy(accessibility = "CreateAccount")
+    @iOSXCUITFindBy(accessibility = "signInButton")
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/welcome_button_create_account\")")
     private MobileElement createAcc;
 

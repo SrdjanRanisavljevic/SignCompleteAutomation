@@ -1,75 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="5" time="512.04531">
-<testcase classname="Register features" name="[first uninstall] Register a new user using magic link" time="120.062892">
-<system-out><![CDATA[Given User is in Launcher Screen............................................passed
-And User selects Create Account.............................................passed
-Given User enters a valid e-mail address....................................passed
-And User selects a country from the list....................................passed
-And User enters birth date..................................................passed
-And User proceeds with Consents.............................................passed
-And User enters a display name..............................................passed
-When User clicks on E-mail Me Magic Link....................................passed
-And User clicks Check E-mail from Magic Link................................passed
-And User unlocks the app from received e-mail...............................passed
-And User skips tutorial.....................................................passed
-Then User is in Home View...................................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Register features" name="[first uninstall] User is in Home Screen after a successful Register even when interacting with the app" time="126.602164">
-<system-out><![CDATA[Given User is in Launcher Screen............................................passed
-And User selects Create Account.............................................passed
-Given User enters a valid e-mail address....................................passed
-And User selects a country from the list....................................passed
-And User enters birth date..................................................passed
-And User proceeds with Consents.............................................passed
-And User enters a display name..............................................passed
-When User clicks on E-mail Me Magic Link....................................passed
-And User clicks Check E-mail from Magic Link................................passed
-And User unlocks the app from received e-mail...............................passed
-And User skips tutorial.....................................................passed
-And User is in Home View....................................................passed
-And User "puts the app in the background"...................................passed
-And User open the app.......................................................passed
-Then User is in "Home Screen"...............................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Register features" name="[first uninstall] User is in Home Screen after a successful Register even when interacting with the app 2" time="125.075983">
-<system-out><![CDATA[Given User is in Launcher Screen............................................passed
-And User selects Create Account.............................................passed
-Given User enters a valid e-mail address....................................passed
-And User selects a country from the list....................................passed
-And User enters birth date..................................................passed
-And User proceeds with Consents.............................................passed
-And User enters a display name..............................................passed
-When User clicks on E-mail Me Magic Link....................................passed
-And User clicks Check E-mail from Magic Link................................passed
-And User unlocks the app from received e-mail...............................passed
-And User skips tutorial.....................................................passed
-And User is in Home View....................................................passed
-And User "closes the app"...................................................passed
-And User open the app.......................................................passed
-Then User is in "Home Screen"...............................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Register features" name="[first uninstall] Register a too young user" time="51.233329">
-<system-out><![CDATA[Given User is in Launcher Screen............................................passed
-And User selects Create Account.............................................passed
-Given User enters a valid e-mail address....................................passed
-And User selects a country from the list....................................passed
-And User enters a birth date from a recent date.............................passed
-Then User is notified that he is too young to register......................passed
-]]></system-out>
-</testcase>
-<testcase classname="Register features" name="[first uninstall] Trying to register an already registered user and continue with Login flow" time="89.070942">
-<system-out><![CDATA[Given User is in Launcher Screen............................................passed
-And User selects Create Account.............................................passed
-Given User enters an already registered e-mail address......................passed
-Then User is in Check E-mail Screen.........................................passed
-And User is recognized as to be already registered..........................passed
-When User clicks Check E-mail from Magic Link...............................passed
-And User unlocks the app from received e-mail...............................passed
-And User skips tutorial.....................................................passed
-Then User is in Home View...................................................passed
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="71.555246">
+<testcase classname="SignLogin" name="Sign Login Feature" time="71.555246">
+<system-out><![CDATA[Given User is in Sign launcher screen.......................................passed
+And User clicks on Sign login button........................................passed
+And User enters Sign userName...............................................passed
+And User enters Sign Password...............................................passed
+And User clicks on Sign Sign in button......................................passed
+And Random Waiter for Vesa to see what is happening.........................passed
 ]]></system-out>
 </testcase>
 </testsuite>
