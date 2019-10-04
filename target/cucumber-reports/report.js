@@ -7,23 +7,23 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.before({
-  "duration": 74022800,
+  "duration": 119807100,
   "status": "passed"
 });
 formatter.before({
-  "duration": 112800,
+  "duration": 102100,
   "status": "passed"
 });
 formatter.before({
-  "duration": 33691086400,
+  "duration": 27716398000,
   "status": "passed"
 });
 formatter.before({
-  "duration": 1043960200,
+  "duration": 1033498900,
   "status": "passed"
 });
 formatter.before({
-  "duration": 46900,
+  "duration": 52601,
   "status": "passed"
 });
 formatter.scenario({
@@ -46,82 +46,24 @@ formatter.scenario({
 });
 formatter.step({
   "line": 8,
-  "name": "User is in Sign launcher screen",
+  "name": "Sign in with production user and change server to Stage",
   "keyword": "Given "
 });
-formatter.step({
-  "line": 9,
-  "name": "User clicks on Sign login button",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 10,
-  "name": "User enters Sign userName",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 11,
-  "name": "User enters Sign Password",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 12,
-  "name": "User clicks on Sign Sign in button",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 13,
-  "name": "Random Waiter for Vesa to see what is happening",
-  "keyword": "And "
-});
 formatter.match({
-  "location": "SignLauncher.swipe3TimesToGetTheLoginButton()"
+  "location": "SignLauncher.changeServerToStage()"
 });
 formatter.result({
-  "duration": 10540698800,
-  "status": "passed"
+  "duration": 44492619499,
+  "error_message": "java.lang.AssertionError: Cannot click on Login button from Sign Launcher screen\r\n\tat api.sign.launcher.SignLauncherView.clickOnLoginButton(SignLauncherView.java:94)\r\n\tat cucumber.cucumberTests.SignLauncher.changeServerToStage(SignLauncher.java:38)\r\n\tat ✽.Given Sign in with production user and change server to Stage(src/test/java/cucumber/features/SignLogin.feature:8)\r\n",
+  "status": "failed"
 });
-formatter.match({
-  "location": "SignLauncher.clickOnLoginButton()"
-});
-formatter.result({
-  "duration": 2995066400,
-  "status": "passed"
-});
-formatter.match({
-  "location": "SignLauncher.enterUserName()"
-});
-formatter.result({
-  "duration": 3337044600,
-  "status": "passed"
-});
-formatter.match({
-  "location": "SignLauncher.enterPassword()"
-});
-formatter.result({
-  "duration": 3915625500,
-  "status": "passed"
-});
-formatter.match({
-  "location": "SignLauncher.clickOnSignInButton()"
-});
-formatter.result({
-  "duration": 3700127500,
-  "status": "passed"
-});
-formatter.match({
-  "location": "SignLauncher.randomSleep()"
-});
-formatter.result({
-  "duration": 10072460200,
+formatter.embedding("image/png", "embedded0.png");
+formatter.after({
+  "duration": 4385648201,
   "status": "passed"
 });
 formatter.after({
-  "duration": 2184970600,
-  "status": "passed"
-});
-formatter.after({
-  "duration": 23400,
+  "duration": 52600,
   "status": "passed"
 });
 });

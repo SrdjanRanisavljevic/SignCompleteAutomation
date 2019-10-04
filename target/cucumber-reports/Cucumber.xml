@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="71.555246">
-<testcase classname="SignLogin" name="Sign Login Feature" time="71.555246">
-<system-out><![CDATA[Given User is in Sign launcher screen.......................................passed
-And User clicks on Sign login button........................................passed
-And User enters Sign userName...............................................passed
-And User enters Sign Password...............................................passed
-And User clicks on Sign Sign in button......................................passed
-And Random Waiter for Vesa to see what is happening.........................passed
-]]></system-out>
+<testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="77.748179">
+<testcase classname="SignLogin" name="Sign Login Feature" time="77.748179">
+<failure message="java.lang.AssertionError: Cannot click on Login button from Sign Launcher screen&#13;&#10;&#9;at api.sign.launcher.SignLauncherView.clickOnLoginButton(SignLauncherView.java:94)&#13;&#10;&#9;at cucumber.cucumberTests.SignLauncher.changeServerToStage(SignLauncher.java:38)&#13;&#10;&#9;at ✽.Given Sign in with production user and change server to Stage(src/test/java/cucumber/features/SignLogin.feature:8)&#13;&#10;"><![CDATA[Given Sign in with production user and change server to Stage...............failed
+
+StackTrace:
+java.lang.AssertionError: Cannot click on Login button from Sign Launcher screen
+	at api.sign.launcher.SignLauncherView.clickOnLoginButton(SignLauncherView.java:94)
+	at cucumber.cucumberTests.SignLauncher.changeServerToStage(SignLauncher.java:38)
+	at ✽.Given Sign in with production user and change server to Stage(src/test/java/cucumber/features/SignLogin.feature:8)
+]]></failure>
 </testcase>
 </testsuite>

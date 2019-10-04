@@ -362,13 +362,31 @@ public class Swipe {
         new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x / 2, y / 2)).moveTo(PointOption.point(width - 10, height / 2)).release().perform();
     }
 
+//    public void swipeLeftElementMobile(MobileElement element) {
+//        Dimension screenDim = Drivers.getMobileDriver().manage().window().getSize();
+//        int height = screenDim.height;
+//        int width = screenDim.width;
+//        int x = element.getSize().getHeight();
+//        int y = element.getSize().getHeight();
+//        new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x * 4/5, y / 2)).moveTo(PointOption.point(width /30, height / 2)).release().perform();
+//    }
+//
+//    public void swipeLeftElementMobileS10(MobileElement element) {
+//        Dimension screenDim = Drivers.getMobileDriver().manage().window().getSize();
+//        int height = screenDim.height;
+//        int width = screenDim.width;
+//        int x = element.getSize().getHeight();
+//        int y = element.getSize().getHeight();
+//        new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x /2 , y / 2)).moveTo(PointOption.point(width /20, height / 2)).release().perform();
+//    }
+
     public void swipeLeftElementMobile(MobileElement element) {
         Dimension screenDim = Drivers.getMobileDriver().manage().window().getSize();
         int height = screenDim.height;
         int width = screenDim.width;
         int x = element.getSize().getHeight();
         int y = element.getSize().getHeight();
-        new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(x * 4/5, y / 2)).moveTo(PointOption.point(width /30, height / 2)).release().perform();
+        new TouchAction(Drivers.getMobileDriver()).longPress(PointOption.point(1000, y / 2)).moveTo(PointOption.point(1, height / 2)).release().perform();
     }
 
     public void scrollDown(Gestures.HorizontalPosition horizontalPosition) {

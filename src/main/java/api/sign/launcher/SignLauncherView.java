@@ -1,8 +1,5 @@
-package api.coca.cola.SignLauncher;
+package api.sign.launcher;
 
-import api.coca.cola.create.account.screen.EmailAddressView;
-import api.coca.cola.launcher.screen.LauncherView;
-import api.coca.cola.login.screen.LoginView;
 import api.drivers.Drivers;
 import core.classic.methods.AssertsUtils;
 import core.classic.methods.Gestures;
@@ -16,8 +13,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
-
-import java.io.FileNotFoundException;
 
 
 public class SignLauncherView {
@@ -36,42 +31,35 @@ public class SignLauncherView {
      * LAUNCHER VIEW ELEMENTS
      */
 
-    @iOSXCUITFindBy(accessibility = "Sign_In_Button")
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.cocacola.app.cee.dev:id/welcome_button_create_account\")")
-    private MobileElement createAcc;
+
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.adobe.echosign:id/sign_fte_page_content_image\")")
     private MobileElement launcherScreen1;
 
-    @iOSXCUITFindBy(accessibility = "LogIn")
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.adobe.echosign:id/sign_fte_page_sign_in_button\")")
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"sign_fte_page_sign_in_button\")")
     private MobileElement login;
 
-    @iOSXCUITFindBy(accessibility = "WelcomeScreenLogo")
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\")")
-    private MobileElement logo;
 
     /**
      * ASSERTATIONS, SEND KEYS
      */
 
-    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeAlert' AND name CONTAINS[c] '“Coca-Cola DEV”'")
-    private MobileElement sendNotificationPopUp;
+//
+//    public SignLauncherView validateElementsLauncherScreem() {
+//        try {
+//            MyLogger.log.info("Validating elements from Launcher Screen");
+//            waiters.waitForElementVisibility(createAcc);
+//            assertsUtils.isElementDisplayed(createAcc);
+//            assertsUtils.isElementDisplayed(login);
+//            assertsUtils.isElementEnabled(logo);
+//            return this;
+//        } catch (WebDriverException e) {
+//            throw new AssertionError("Cannot validate elements from Launcher Screen");
+//        }
+//    }
 
-    public SignLauncherView validateElementsLauncherScreem() {
-        try {
-            MyLogger.log.info("Validating elements from Launcher Screen");
-            waiters.waitForElementVisibility(createAcc);
-            assertsUtils.isElementDisplayed(createAcc);
-            assertsUtils.isElementDisplayed(login);
-            assertsUtils.isElementEnabled(logo);
-            return this;
-        } catch (WebDriverException e) {
-            throw new AssertionError("Cannot validate elements from Launcher Screen");
-        }
-    }
-
-    public SignLauncherView SwipeLeftThreeTimes() {
+    public SignLauncherView swipeLeftThreeTimes() {
         try {
             MyLogger.log.info("Swyping four times to get the screen with login button");
             for (int i = 0; i <= 2; i++) {
@@ -80,13 +68,26 @@ public class SignLauncherView {
             }
             return new SignLauncherView();
         }catch (WebDriverException e) {
-            throw new AssertionError("Cannot swipe right damn it!");
+            throw new AssertionError("Cannot swipe left damn it!");
+        }
+    }
+
+    public SignLauncherView SwipeLeftThreeTimesS10() {
+        try {
+            MyLogger.log.info("Swyping four times to get the screen with login button");
+            for (int i = 0; i <= 2; i++) {
+
+                swipe.swipeLeftElementMobile(launcherScreen1);
+            }
+            return new SignLauncherView();
+        }catch (WebDriverException e) {
+            throw new AssertionError("Cannot swipe left s10 damn it!");
         }
     }
 
     public SignLauncherView clickOnLoginButton() {
         try {
-            MyLogger.log.info("Trying to click on Login button");
+            MyLogger.log.info("Clicking on Login button on launcher screen");
             gestures.clickOnMobileElement(login);
             return new SignLauncherView();
         } catch (WebDriverException e) {

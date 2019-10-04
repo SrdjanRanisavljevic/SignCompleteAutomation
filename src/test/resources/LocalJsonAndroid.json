@@ -1,5 +1,5 @@
 {
-  "DeviceID": "8cf035c5",
+  "DeviceID": "ce041604406c423d01",
   "BootstratPort": "4777",
   "ChromePort": "9537",
   "platformName": "android",
@@ -8,8 +8,8 @@
   "appActivity": "com.adobe.echosign.ui.ASLauncherActivity",
   "appPackage": "com.adobe.echosign",
   "automationName": "uiautomator2",
-  "deviceUDID": "8cf035c5",
-  "DeviceName": "8cf035c5",
+  "deviceUDID": "ce041604406c423d01",
+  "DeviceName": "ce041604406c423d01",
   "ip": "127.0.0.1",
   "appiumServerPort": 4723,
   "systemPort": 8201,
@@ -23,11 +23,12 @@
   "IosWebKit": "6666",
   "sessionOverride": "true",
   "nodeJS": "C:/Program Files/nodejs/node.exe",
-  "appiumJS": "C:/Users/Srdjan.Ranisavljevic/node_modules/appium/build/lib/main.js",
-  "OSversion": "9",
-  "usermail": "echosign.pitra@gmail.com",
-  "userpassword": "Adobe1234!@#$",
+  "appiumJS": "C:/Users/Srdjan.Ranisavljevic/AppData/Roaming/npm/node_modules/appium/build/lib/main.js",
+  "OSversion": "8",
+  "usermail": "echosign.igor+prod@gmail.com",
+  "userpassword": "Adobe123!@#",
   "name": "Djansr",
   "prefixEmail": "srdjan",
   "newpassword": "Adobe123!@#"
 }
+
